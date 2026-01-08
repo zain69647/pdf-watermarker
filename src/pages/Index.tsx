@@ -17,6 +17,7 @@ const Index = () => {
   const [processedFiles, setProcessedFiles] = useState<{ filename: string; data: Uint8Array }[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [watermarkSize, setWatermarkSize] = useState(400);
+  const [watermarkOpacity, setWatermarkOpacity] = useState(10);
 
   // Check if watermark logo exists on mount
   useEffect(() => {
@@ -87,7 +88,8 @@ const Index = () => {
                 f.id === fileItem.id ? { ...f, progress } : f
               ));
             },
-            watermarkSize
+            watermarkSize,
+            watermarkOpacity / 100
           );
           
           results.push(result);
@@ -192,24 +194,48 @@ const Index = () => {
           disabled={isProcessing || watermarkAvailable === false}
         />
 
-        {/* Watermark size control */}
-        <div className="space-y-3 p-4 rounded-xl bg-card border border-border">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-foreground">Watermark Size</label>
-            <span className="text-sm text-muted-foreground">{watermarkSize}px</span>
+        {/* Watermark settings */}
+        <div className="space-y-4 p-4 rounded-xl bg-card border border-border">
+          {/* Size control */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-foreground">Watermark Size</label>
+              <span className="text-sm text-muted-foreground">{watermarkSize}px</span>
+            </div>
+            <Slider
+              value={[watermarkSize]}
+              onValueChange={(values) => setWatermarkSize(values[0])}
+              min={50}
+              max={500}
+              step={10}
+              disabled={isProcessing}
+              className="w-full"
+            />
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>Small (50px)</span>
+              <span>Large (500px)</span>
+            </div>
           </div>
-          <Slider
-            value={[watermarkSize]}
-            onValueChange={(values) => setWatermarkSize(values[0])}
-            min={50}
-            max={500}
-            step={10}
-            disabled={isProcessing}
-            className="w-full"
-          />
-          <div className="flex justify-between text-xs text-muted-foreground">
-            <span>Small (50px)</span>
-            <span>Large (500px)</span>
+
+          {/* Opacity control */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-foreground">Watermark Opacity</label>
+              <span className="text-sm text-muted-foreground">{watermarkOpacity}%</span>
+            </div>
+            <Slider
+              value={[watermarkOpacity]}
+              onValueChange={(values) => setWatermarkOpacity(values[0])}
+              min={5}
+              max={100}
+              step={5}
+              disabled={isProcessing}
+              className="w-full"
+            />
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>Subtle (5%)</span>
+              <span>Solid (100%)</span>
+            </div>
           </div>
         </div>
 

@@ -5,68 +5,113 @@ interface ProcessedFile {
   data: Uint8Array;
 }
 
-/**
- * Converts Uint8Array to base64 string
- */
-function uint8ArrayToBase64(bytes: Uint8Array): string {
-  let binary = '';
-  const len = bytes.byteLength;
-  for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
+function isAndroidWebView(): boolean {
+  const ua = navigator.userAgent || '';
+  // Most Android WebView wrappers include "wv" in the UA string.
+  return /Android/i.test(ua) && /\bwv\b/i.test(ua);
 }
 
-/**
- * Downloads a single file using data URL (WebView compatible)
- */
-export function downloadSingleFile(filename: string, data: Uint8Array): void {
-  // Convert to base64 data URL for WebView compatibility
-  const base64 = uint8ArrayToBase64(data);
-  const dataUrl = `data:application/pdf;base64,${base64}`;
-  
+async function tryWebShare(file: File): Promise<boolean> {
+  try {
+    const navAny = navigator as any;
+    if (typeof navAny?.share !== 'function') return false;
+
+    // canShare may not exist in some WebViews
+    if (typeof navAny?.canShare === 'function') {
+      const can = navAny.canShare({ files: [file] });
+      if (!can) return false;
+    }
+
+    await navAny.share({ files: [file], title: file.name });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function downloadBlobWithAnchor(blob: Blob, filename: string): void {
+  const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = dataUrl;
+  link.href = url;
   link.download = filename;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 500);
+}
+
+function openBlobInSameTab(blob: Blob): void {
+  const url = URL.createObjectURL(blob);
+  // Navigate instead of "download" to avoid some WebView download handlers.
+  window.location.href = url;
+  setTimeout(() => URL.revokeObjectURL(url), 5_000);
 }
 
 /**
- * Downloads multiple files as a ZIP archive
+ * Downloads a single file.
+ *
+ * In Android WebView wrappers (like Website2APK Builder), `blob:` downloads are often blocked.
+ * We try Web Share first (best no-host workaround). If not available, we open the PDF instead
+ * of forcing a download.
+ */
+export function downloadSingleFile(filename: string, data: Uint8Array): void {
+  // Copy into a fresh ArrayBuffer (avoids SharedArrayBuffer typing issues in some builds)
+  const bytes = new Uint8Array(data);
+  const blob = new Blob([bytes.buffer], { type: 'application/pdf' });
+
+  if (isAndroidWebView()) {
+    const file = new File([blob], filename, { type: blob.type });
+    void (async () => {
+      const shared = await tryWebShare(file);
+      if (!shared) {
+        // Fallback: open the PDF so the user can use the system viewer/share to save it.
+        openBlobInSameTab(blob);
+        alert('Your Android WebView wrapper blocks direct downloads. I opened the PDF instead — use the viewer\'s Share/Save option, or install the site as a PWA for normal downloads.');
+      }
+    })();
+    return;
+  }
+
+  downloadBlobWithAnchor(blob, filename);
+}
+
+/**
+ * Downloads multiple files as a ZIP archive.
  */
 export async function downloadAsZip(files: ProcessedFile[]): Promise<void> {
   const zip = new JSZip();
-  
-  // Add each file to the ZIP
+
   for (const file of files) {
     zip.file(file.filename, file.data);
   }
-  
-  // Generate the ZIP file as base64
-  const zipBase64 = await zip.generateAsync({ 
-    type: 'base64',
+
+  const zipBlob = await zip.generateAsync({
+    type: 'blob',
     compression: 'DEFLATE',
-    compressionOptions: { level: 6 }
+    compressionOptions: { level: 6 },
   });
-  
-  // Download using data URL for WebView compatibility
-  const dataUrl = `data:application/zip;base64,${zipBase64}`;
-  const link = document.createElement('a');
-  link.href = dataUrl;
-  link.download = `watermarked_pdfs_${Date.now()}.zip`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+
+  const zipName = `watermarked_pdfs_${Date.now()}.zip`;
+
+  if (isAndroidWebView()) {
+    const file = new File([zipBlob], zipName, { type: 'application/zip' });
+    const shared = await tryWebShare(file);
+    if (!shared) {
+      openBlobInSameTab(zipBlob);
+      alert('Your Android WebView wrapper blocks direct downloads. I opened the ZIP instead — use Share/Save, or install the site as a PWA for normal downloads.');
+    }
+    return;
+  }
+
+  downloadBlobWithAnchor(zipBlob, zipName);
 }
 
 /**
- * Smart download - single file directly, multiple as ZIP
+ * Smart download - single file directly, multiple as ZIP.
  */
 export async function downloadFiles(files: ProcessedFile[]): Promise<void> {
   if (files.length === 0) return;
-  
+
   if (files.length === 1) {
     downloadSingleFile(files[0].filename, files[0].data);
   } else {

@@ -4,6 +4,7 @@ import DropZone from '@/components/DropZone';
 import FileList, { FileItem } from '@/components/FileList';
 import { fetchWatermarkImage, processFile } from '@/utils/pdfWatermark';
 import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
+import { Slider } from '@/components/ui/slider';
 
 /**
  * Main PDF Watermarker application
@@ -15,6 +16,7 @@ const Index = () => {
   const [watermarkAvailable, setWatermarkAvailable] = useState<boolean | null>(null);
   const [processedFiles, setProcessedFiles] = useState<{ filename: string; data: Uint8Array }[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [watermarkSize, setWatermarkSize] = useState(200);
 
   // Check if watermark logo exists on mount
   useEffect(() => {
@@ -84,7 +86,8 @@ const Index = () => {
               setFiles(prev => prev.map(f =>
                 f.id === fileItem.id ? { ...f, progress } : f
               ));
-            }
+            },
+            watermarkSize
           );
           
           results.push(result);
@@ -188,6 +191,27 @@ const Index = () => {
           onFilesSelected={handleFilesSelected} 
           disabled={isProcessing || watermarkAvailable === false}
         />
+
+        {/* Watermark size control */}
+        <div className="space-y-3 p-4 rounded-xl bg-card border border-border">
+          <div className="flex items-center justify-between">
+            <label className="text-sm font-medium text-foreground">Watermark Size</label>
+            <span className="text-sm text-muted-foreground">{watermarkSize}px</span>
+          </div>
+          <Slider
+            value={[watermarkSize]}
+            onValueChange={(values) => setWatermarkSize(values[0])}
+            min={50}
+            max={500}
+            step={10}
+            disabled={isProcessing}
+            className="w-full"
+          />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>Small (50px)</span>
+            <span>Large (500px)</span>
+          </div>
+        </div>
 
         {/* File list */}
         <FileList 

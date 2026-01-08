@@ -19,12 +19,14 @@ export async function fetchWatermarkImage(): Promise<ArrayBuffer> {
  * @param pdfBytes - Original PDF file as ArrayBuffer
  * @param watermarkBytes - Watermark image as ArrayBuffer
  * @param opacity - Opacity of watermark (0-1, default 0.1 = 10%)
+ * @param watermarkMaxSize - Maximum size of watermark in pixels (default 200)
  * @returns Modified PDF as Uint8Array
  */
 export async function applyWatermark(
   pdfBytes: ArrayBuffer,
   watermarkBytes: ArrayBuffer,
-  opacity: number = 0.1
+  opacity: number = 0.1,
+  watermarkMaxSize: number = 200
 ): Promise<Uint8Array> {
   // Load the PDF document
   const pdfDoc = await PDFDocument.load(pdfBytes);
@@ -40,9 +42,6 @@ export async function applyWatermark(
   
   // Get all pages
   const pages = pdfDoc.getPages();
-  
-  // Desired watermark size (will scale to fit)
-  const watermarkMaxSize = 200;
   
   // Calculate scaled dimensions maintaining aspect ratio
   const imgWidth = watermarkImage.width;
@@ -87,12 +86,14 @@ export async function applyWatermark(
  * @param file - PDF File object
  * @param watermarkBytes - Watermark image as ArrayBuffer
  * @param onProgress - Progress callback (0-100)
+ * @param watermarkSize - Maximum size of the watermark in pixels (default 200)
  * @returns Object with filename and watermarked PDF bytes
  */
 export async function processFile(
   file: File,
   watermarkBytes: ArrayBuffer,
-  onProgress?: (progress: number) => void
+  onProgress?: (progress: number) => void,
+  watermarkSize: number = 200
 ): Promise<{ filename: string; data: Uint8Array }> {
   onProgress?.(10);
   
@@ -100,8 +101,8 @@ export async function processFile(
   const pdfBytes = await file.arrayBuffer();
   onProgress?.(30);
   
-  // Apply watermark
-  const watermarkedPdf = await applyWatermark(pdfBytes, watermarkBytes);
+  // Apply watermark with custom size
+  const watermarkedPdf = await applyWatermark(pdfBytes, watermarkBytes, 0.1, watermarkSize);
   onProgress?.(90);
   
   // Generate output filename

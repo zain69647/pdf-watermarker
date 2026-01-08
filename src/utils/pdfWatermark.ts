@@ -93,7 +93,8 @@ export async function processFile(
   file: File,
   watermarkBytes: ArrayBuffer,
   onProgress?: (progress: number) => void,
-  watermarkSize: number = 200
+  watermarkSize: number = 200,
+  watermarkOpacity: number = 0.1
 ): Promise<{ filename: string; data: Uint8Array }> {
   onProgress?.(10);
   
@@ -101,8 +102,8 @@ export async function processFile(
   const pdfBytes = await file.arrayBuffer();
   onProgress?.(30);
   
-  // Apply watermark with custom size
-  const watermarkedPdf = await applyWatermark(pdfBytes, watermarkBytes, 0.1, watermarkSize);
+  // Apply watermark with custom size and opacity
+  const watermarkedPdf = await applyWatermark(pdfBytes, watermarkBytes, watermarkOpacity, watermarkSize);
   onProgress?.(90);
   
   // Generate output filename

@@ -16,7 +16,7 @@ const Index = () => {
   const [watermarkAvailable, setWatermarkAvailable] = useState<boolean | null>(null);
   const [processedFiles, setProcessedFiles] = useState<{ filename: string; data: Uint8Array }[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [watermarkSize, setWatermarkSize] = useState(200);
+  const [watermarkSize, setWatermarkSize] = useState(400);
 
   // Check if watermark logo exists on mount
   useEffect(() => {

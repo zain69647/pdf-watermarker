@@ -1,10 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
-import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2, FileCheck } from 'lucide-react';
 import DropZone from '@/components/DropZone';
 import FileList, { FileItem } from '@/components/FileList';
 import { fetchWatermarkImage, processFile } from '@/utils/pdfWatermark';
 import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
+
+const TOTAL_WATERMARKED_KEY = 'pdf_watermarker_total_count';
 
 /**
  * Main PDF Watermarker application
@@ -18,6 +20,15 @@ const Index = () => {
   const [error, setError] = useState<string | null>(null);
   const [watermarkSize, setWatermarkSize] = useState(400);
   const [watermarkOpacity, setWatermarkOpacity] = useState(10);
+  const [totalWatermarked, setTotalWatermarked] = useState(0);
+
+  // Load total count from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem(TOTAL_WATERMARKED_KEY);
+    if (stored) {
+      setTotalWatermarked(parseInt(stored, 10) || 0);
+    }
+  }, []);
 
   // Check if watermark logo exists on mount
   useEffect(() => {
@@ -116,12 +127,18 @@ const Index = () => {
       
       setProcessedFiles(results);
       
+      // Update total watermarked count
+      if (results.length > 0) {
+        const newTotal = totalWatermarked + results.length;
+        setTotalWatermarked(newTotal);
+        localStorage.setItem(TOTAL_WATERMARKED_KEY, newTotal.toString());
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsProcessing(false);
     }
-  }, [files, isProcessing]);
+  }, [files, isProcessing, totalWatermarked]);
 
   // Download processed files
   const handleDownload = useCallback(async () => {
@@ -148,6 +165,16 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Global counter banner */}
+      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2">
+        <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
+          <FileCheck className="w-4 h-4 text-primary" />
+          <span className="text-sm font-medium text-foreground">
+            <span className="text-primary font-bold">{totalWatermarked.toLocaleString()}</span> PDFs watermarked
+          </span>
+        </div>
+      </div>
+
       {/* Header */}
       <header className="sticky top-0 z-10 bg-card border-b border-border px-4 py-4">
         <div className="container max-w-lg mx-auto flex items-center gap-3">

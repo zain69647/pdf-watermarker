@@ -5,8 +5,7 @@ import FileList, { FileItem } from '@/components/FileList';
 import { fetchWatermarkImage, processFile } from '@/utils/pdfWatermark';
 import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
-
-const TOTAL_WATERMARKED_KEY = 'pdf_watermarker_total_count';
+import { supabase } from '@/integrations/supabase/client';
 
 /**
  * Main PDF Watermarker application
@@ -20,14 +19,45 @@ const Index = () => {
   const [error, setError] = useState<string | null>(null);
   const [watermarkSize, setWatermarkSize] = useState(400);
   const [watermarkOpacity, setWatermarkOpacity] = useState(10);
-  const [totalWatermarked, setTotalWatermarked] = useState(0);
+  const [totalWatermarked, setTotalWatermarked] = useState<number | null>(null);
 
-  // Load total count from localStorage on mount
+  // Load global count from database and subscribe to realtime updates
   useEffect(() => {
-    const stored = localStorage.getItem(TOTAL_WATERMARKED_KEY);
-    if (stored) {
-      setTotalWatermarked(parseInt(stored, 10) || 0);
-    }
+    // Fetch initial count
+    const fetchCount = async () => {
+      const { data, error } = await supabase
+        .from('global_stats')
+        .select('total_watermarked')
+        .eq('id', 'main')
+        .single();
+      
+      if (!error && data) {
+        setTotalWatermarked(data.total_watermarked);
+      }
+    };
+    
+    fetchCount();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('global-stats')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'global_stats',
+          filter: 'id=eq.main'
+        },
+        (payload) => {
+          setTotalWatermarked(payload.new.total_watermarked);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   // Check if watermark logo exists on mount
@@ -127,18 +157,30 @@ const Index = () => {
       
       setProcessedFiles(results);
       
-      // Update total watermarked count
+      // Update global counter in database
       if (results.length > 0) {
-        const newTotal = totalWatermarked + results.length;
-        setTotalWatermarked(newTotal);
-        localStorage.setItem(TOTAL_WATERMARKED_KEY, newTotal.toString());
+        const { data: currentData } = await supabase
+          .from('global_stats')
+          .select('total_watermarked')
+          .eq('id', 'main')
+          .single();
+        
+        if (currentData) {
+          await supabase
+            .from('global_stats')
+            .update({ 
+              total_watermarked: currentData.total_watermarked + results.length,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', 'main');
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsProcessing(false);
     }
-  }, [files, isProcessing, totalWatermarked]);
+  }, [files, isProcessing]);
 
   // Download processed files
   const handleDownload = useCallback(async () => {
@@ -170,7 +212,7 @@ const Index = () => {
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground">
-            <span className="text-primary font-bold">{totalWatermarked.toLocaleString()}</span> PDFs watermarked
+            <span className="text-primary font-bold">{totalWatermarked !== null ? totalWatermarked.toLocaleString() : '...'}</span> PDFs watermarked globally
           </span>
         </div>
       </div>

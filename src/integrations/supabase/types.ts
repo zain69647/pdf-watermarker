@@ -14,7 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      global_stats: {
+        Row: {
+          id: string
+          total_watermarked: number
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          total_watermarked?: number
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          total_watermarked?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

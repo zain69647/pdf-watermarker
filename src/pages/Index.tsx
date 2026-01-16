@@ -3,12 +3,14 @@ import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2, FileCheck } fro
 import DropZone from '@/components/DropZone';
 import FileList, { FileItem } from '@/components/FileList';
 import { fetchWatermarkImage, processFile } from '@/utils/pdfWatermark';
+import { processImageFile, isImageFile, isPdfFile } from '@/utils/imageWatermark';
 import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
 /**
- * Main PDF Watermarker application
+ * Main PDF & Image Watermarker application
  * Mobile-first design, fully client-side
  */
 const Index = () => {
@@ -121,17 +123,35 @@ const Index = () => {
         ));
         
         try {
-          const result = await processFile(
-            fileItem.file,
-            watermarkBytes,
-            (progress) => {
-              setFiles(prev => prev.map(f =>
-                f.id === fileItem.id ? { ...f, progress } : f
-              ));
-            },
-            watermarkSize,
-            watermarkOpacity / 100
-          );
+          let result: { filename: string; data: Uint8Array };
+          
+          if (isPdfFile(fileItem.file)) {
+            result = await processFile(
+              fileItem.file,
+              watermarkBytes,
+              (progress) => {
+                setFiles(prev => prev.map(f =>
+                  f.id === fileItem.id ? { ...f, progress } : f
+                ));
+              },
+              watermarkSize,
+              watermarkOpacity / 100
+            );
+          } else if (isImageFile(fileItem.file)) {
+            result = await processImageFile(
+              fileItem.file,
+              watermarkBytes,
+              (progress) => {
+                setFiles(prev => prev.map(f =>
+                  f.id === fileItem.id ? { ...f, progress } : f
+                ));
+              },
+              watermarkSize,
+              watermarkOpacity / 100
+            );
+          } else {
+            throw new Error('Unsupported file type');
+          }
           
           results.push(result);
           
@@ -212,7 +232,7 @@ const Index = () => {
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground">
-            <span className="text-primary font-bold">{totalWatermarked !== null ? totalWatermarked.toLocaleString() : '...'}</span> PDFs watermarked globally
+            <AnimatedCounter value={totalWatermarked} className="text-primary font-bold" /> files watermarked globally
           </span>
         </div>
       </div>
@@ -224,8 +244,8 @@ const Index = () => {
             <Droplet className="w-5 h-5 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground">PDF Watermarker</h1>
-            <p className="text-xs text-muted-foreground">Add watermarks to your PDFs</p>
+            <h1 className="text-lg font-bold text-foreground">Watermarker</h1>
+            <p className="text-xs text-muted-foreground">Add watermarks to PDFs & images</p>
           </div>
         </div>
       </header>
@@ -326,7 +346,7 @@ const Index = () => {
                 className="btn-primary w-full"
               >
                 <Droplet className="w-5 h-5" />
-                {isProcessing ? 'Processing...' : `Apply Watermark to ${pendingCount} PDF${pendingCount !== 1 ? 's' : ''}`}
+                {isProcessing ? 'Processing...' : `Apply Watermark to ${pendingCount} file${pendingCount !== 1 ? 's' : ''}`}
               </button>
             )}
 
@@ -345,7 +365,7 @@ const Index = () => {
                   className="btn-primary w-full"
                 >
                   <Download className="w-5 h-5" />
-                  Download {processedFiles.length > 1 ? 'All (ZIP)' : 'PDF'}
+                  Download {processedFiles.length > 1 ? 'All (ZIP)' : 'File'}
                 </button>
                 
                 {/* Individual download buttons for multiple files */}

@@ -15,8 +15,7 @@ export async function applyImageWatermark(
   return new Promise((resolve, reject) => {
     // Load main image
     const mainImg = new Image();
-    const mainBlob = new Blob([imageFile], { type: imageFile.type });
-    const mainUrl = URL.createObjectURL(mainBlob);
+    const mainUrl = URL.createObjectURL(imageFile);
 
     mainImg.onload = () => {
       // Load watermark image

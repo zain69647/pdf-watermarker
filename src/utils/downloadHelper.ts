@@ -57,16 +57,25 @@ function openBlobInSameTab(blob: Blob): void {
 export function downloadSingleFile(filename: string, data: Uint8Array): void {
   // Copy into a fresh ArrayBuffer (avoids SharedArrayBuffer typing issues in some builds)
   const bytes = new Uint8Array(data);
-  const blob = new Blob([bytes.buffer], { type: 'application/pdf' });
+  
+  // Determine mime type from filename extension
+  const ext = filename.split('.').pop()?.toLowerCase() || '';
+  let mimeType = 'application/pdf';
+  if (ext === 'png') mimeType = 'image/png';
+  else if (ext === 'jpg' || ext === 'jpeg') mimeType = 'image/jpeg';
+  else if (ext === 'webp') mimeType = 'image/webp';
+  else if (ext === 'gif') mimeType = 'image/gif';
+  
+  const blob = new Blob([bytes.buffer], { type: mimeType });
 
   if (isAndroidWebView()) {
     const file = new File([blob], filename, { type: blob.type });
     void (async () => {
       const shared = await tryWebShare(file);
       if (!shared) {
-        // Fallback: open the PDF so the user can use the system viewer/share to save it.
+        // Fallback: open the file so the user can use the system viewer/share to save it.
         openBlobInSameTab(blob);
-        alert('Your Android WebView wrapper blocks direct downloads. I opened the PDF instead — use the viewer\'s Share/Save option, or install the site as a PWA for normal downloads.');
+        alert('Your Android WebView wrapper blocks direct downloads. I opened the file instead — use the viewer\'s Share/Save option, or install the site as a PWA for normal downloads.');
       }
     })();
     return;
@@ -91,7 +100,7 @@ export async function downloadAsZip(files: ProcessedFile[]): Promise<void> {
     compressionOptions: { level: 6 },
   });
 
-  const zipName = `watermarked_pdfs_${Date.now()}.zip`;
+  const zipName = `watermarked_files_${Date.now()}.zip`;
 
   if (isAndroidWebView()) {
     const file = new File([zipBlob], zipName, { type: 'application/zip' });

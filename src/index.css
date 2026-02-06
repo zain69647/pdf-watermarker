@@ -240,3 +240,81 @@
     animation: fade-in-up 0.3s ease-out forwards;
   }
 }
+
+/* ============================================
+   Lahore Kite Festival Decorations
+   Lightweight CSS-only animations
+   ============================================ */
+
+.kite-decorations-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.kite-container {
+  position: absolute;
+  left: var(--kite-start-x);
+  top: var(--kite-start-y);
+  animation: kite-float var(--kite-duration) linear infinite;
+  animation-delay: var(--kite-delay);
+  will-change: transform;
+}
+
+/* Main floating animation - diagonal movement */
+@keyframes kite-float {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.8;
+  }
+  95% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(30vw, -120vh);
+    opacity: 0;
+  }
+}
+
+/* Subtle sway animation for the kite body */
+.kite-sway {
+  animation: kite-sway 3s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@keyframes kite-sway {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+/* Tail wiggle animation */
+.kite-tail {
+  animation: tail-wiggle 1.5s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes tail-wiggle {
+  0%, 100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+/* Performance optimization for low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .kite-decorations-layer {
+    display: none;
+  }
+}

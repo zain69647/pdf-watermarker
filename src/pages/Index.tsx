@@ -231,7 +231,7 @@ const Index = () => {
       <KiteDecorations />
       
       {/* Global counter banner */}
-      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10">
+      <div className="bg-primary/10 backdrop-blur-sm border-b border-primary/20 px-4 py-2 relative z-10">
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground">
@@ -241,7 +241,7 @@ const Index = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-card border-b border-border px-4 py-4">
+      <header className="sticky top-0 z-20 bg-card/80 backdrop-blur-md border-b border-border/50 px-4 py-4">
         <div className="container max-w-lg mx-auto flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
             <Droplet className="w-5 h-5 text-primary-foreground" />
@@ -287,7 +287,7 @@ const Index = () => {
         />
 
         {/* Watermark settings */}
-        <div className="space-y-4 p-4 rounded-xl bg-card border border-border">
+        <div className="space-y-4 p-4 rounded-xl bg-card/70 backdrop-blur-sm border border-border/50">
           {/* Size control */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -428,7 +428,7 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border mt-auto relative z-10">
+      <footer className="border-t border-border/50 mt-auto relative z-10 bg-card/60 backdrop-blur-sm">
         <div className="container max-w-lg mx-auto px-4 py-4 text-center">
           <p className="text-xs text-muted-foreground">
             No ads • No tracking • No data collection

@@ -116,14 +116,15 @@
   .drop-zone {
     @apply relative flex flex-col items-center justify-center
            rounded-2xl border-2 border-dashed
-           transition-all duration-200 ease-out cursor-pointer;
+           transition-all duration-200 ease-out cursor-pointer
+           backdrop-blur-sm;
     border-color: hsl(var(--drop-zone-border));
-    background-color: hsl(var(--drop-zone-bg));
+    background-color: hsl(var(--drop-zone-bg) / 0.7);
   }
 
   .drop-zone:hover,
   .drop-zone.dragging {
-    background-color: hsl(var(--drop-zone-bg-active));
+    background-color: hsl(var(--drop-zone-bg-active) / 0.8);
     border-color: hsl(var(--primary));
     transform: scale(1.01);
   }
@@ -135,8 +136,8 @@
 
   /* File list item */
   .file-item {
-    @apply flex items-center gap-3 p-4 rounded-xl;
-    background-color: hsl(var(--file-item-bg));
+    @apply flex items-center gap-3 p-4 rounded-xl backdrop-blur-sm;
+    background-color: hsl(var(--file-item-bg) / 0.7);
     box-shadow: var(--shadow-soft);
   }
 

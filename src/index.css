@@ -248,17 +248,20 @@
 
 .kite-decorations-layer {
   position: fixed;
-  inset: 0;
-  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
   pointer-events: none;
-  overflow: hidden;
+  overflow: visible;
   transition: opacity 0.3s ease;
 }
 
 .kite-container {
-  position: absolute;
+  position: fixed;
   left: var(--kite-start-x);
-  top: var(--kite-start-y);
+  bottom: calc(-5vh + var(--kite-offset, 0px));
   animation: kite-float var(--kite-duration) linear infinite;
   animation-delay: var(--kite-delay);
   will-change: transform;

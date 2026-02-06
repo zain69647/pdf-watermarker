@@ -8,6 +8,8 @@ import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import KiteDecorations from '@/components/KiteDecorations';
+import FestivalToggle from '@/components/FestivalToggle';
 
 /**
  * Main PDF & Image Watermarker application
@@ -22,7 +24,26 @@ const Index = () => {
   const [watermarkSize, setWatermarkSize] = useState(400);
   const [watermarkOpacity, setWatermarkOpacity] = useState(10);
   const [totalWatermarked, setTotalWatermarked] = useState<number | null>(null);
+  
+  // Festival decorations toggle - persisted in localStorage
+  const [festivalEnabled, setFestivalEnabled] = useState(() => {
+    try {
+      const saved = localStorage.getItem('festivalDecorations');
+      return saved !== null ? JSON.parse(saved) : true;
+    } catch {
+      return true;
+    }
+  });
 
+  // Persist festival toggle state
+  const handleFestivalToggle = useCallback((enabled: boolean) => {
+    setFestivalEnabled(enabled);
+    try {
+      localStorage.setItem('festivalDecorations', JSON.stringify(enabled));
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, []);
   // Load global count from database and subscribe to realtime updates
   useEffect(() => {
     // Fetch initial count
@@ -226,9 +247,12 @@ const Index = () => {
   const hasErrors = files.some(f => f.status === 'error');
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Kite Festival Decorations - behind content */}
+      <KiteDecorations enabled={festivalEnabled} />
+      
       {/* Global counter banner */}
-      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2">
+      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10">
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground">
@@ -238,7 +262,7 @@ const Index = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-card border-b border-border px-4 py-4">
+      <header className="sticky top-0 z-20 bg-card border-b border-border px-4 py-4">
         <div className="container max-w-lg mx-auto flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
             <Droplet className="w-5 h-5 text-primary-foreground" />
@@ -251,7 +275,7 @@ const Index = () => {
       </header>
 
       {/* Main content */}
-      <main className="container max-w-lg mx-auto px-4 py-6 space-y-6">
+      <main className="container max-w-lg mx-auto px-4 py-6 space-y-6 relative z-10">
         
         {/* Warning if watermark not available */}
         {watermarkAvailable === false && (
@@ -407,6 +431,9 @@ const Index = () => {
           </div>
         )}
 
+        {/* Festival Toggle */}
+        <FestivalToggle enabled={festivalEnabled} onToggle={handleFestivalToggle} />
+
         {/* Info section */}
         <div className="pt-4 border-t border-border">
           <div className="text-center space-y-2">
@@ -424,7 +451,7 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border mt-auto">
+      <footer className="border-t border-border mt-auto relative z-10">
         <div className="container max-w-lg mx-auto px-4 py-4 text-center">
           <p className="text-xs text-muted-foreground">
             No ads • No tracking • No data collection

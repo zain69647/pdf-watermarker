@@ -264,20 +264,20 @@
   will-change: transform;
 }
 
-/* Main floating animation - diagonal movement */
+/* Main floating animation - faster diagonal movement */
 @keyframes kite-float {
   0% {
     transform: translate(0, 0);
     opacity: 0;
   }
-  5% {
-    opacity: 0.8;
+  8% {
+    opacity: 0.9;
   }
-  95% {
-    opacity: 0.8;
+  92% {
+    opacity: 0.9;
   }
   100% {
-    transform: translate(30vw, -120vh);
+    transform: translate(25vw, -110vh);
     opacity: 0;
   }
 }

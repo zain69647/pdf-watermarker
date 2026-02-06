@@ -9,7 +9,6 @@ import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import KiteDecorations from '@/components/KiteDecorations';
-import FestivalToggle from '@/components/FestivalToggle';
 
 /**
  * Main PDF & Image Watermarker application
@@ -24,26 +23,6 @@ const Index = () => {
   const [watermarkSize, setWatermarkSize] = useState(400);
   const [watermarkOpacity, setWatermarkOpacity] = useState(10);
   const [totalWatermarked, setTotalWatermarked] = useState<number | null>(null);
-  
-  // Festival decorations toggle - persisted in localStorage
-  const [festivalEnabled, setFestivalEnabled] = useState(() => {
-    try {
-      const saved = localStorage.getItem('festivalDecorations');
-      return saved !== null ? JSON.parse(saved) : true;
-    } catch {
-      return true;
-    }
-  });
-
-  // Persist festival toggle state
-  const handleFestivalToggle = useCallback((enabled: boolean) => {
-    setFestivalEnabled(enabled);
-    try {
-      localStorage.setItem('festivalDecorations', JSON.stringify(enabled));
-    } catch {
-      // Ignore localStorage errors
-    }
-  }, []);
   // Load global count from database and subscribe to realtime updates
   useEffect(() => {
     // Fetch initial count
@@ -249,7 +228,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       {/* Kite Festival Decorations - behind content */}
-      <KiteDecorations enabled={festivalEnabled} />
+      <KiteDecorations />
       
       {/* Global counter banner */}
       <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10">
@@ -431,8 +410,6 @@ const Index = () => {
           </div>
         )}
 
-        {/* Festival Toggle */}
-        <FestivalToggle enabled={festivalEnabled} onToggle={handleFestivalToggle} />
 
         {/* Info section */}
         <div className="pt-4 border-t border-border">

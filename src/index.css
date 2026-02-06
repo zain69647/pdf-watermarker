@@ -286,9 +286,19 @@
   }
 }
 
-/* Subtle sway animation for the kite body */
+/* Sway animations - different speeds for variety */
 .kite-sway {
   animation: kite-sway 3s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.kite-sway-slow {
+  animation: kite-sway-slow 4.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.kite-sway-fast {
+  animation: kite-sway-fast 2s ease-in-out infinite;
   transform-origin: center center;
 }
 
@@ -298,6 +308,30 @@
   }
   50% {
     transform: rotate(5deg);
+  }
+}
+
+@keyframes kite-sway-slow {
+  0%, 100% {
+    transform: rotate(-3deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.02);
+  }
+}
+
+@keyframes kite-sway-fast {
+  0%, 100% {
+    transform: rotate(-8deg);
+  }
+  25% {
+    transform: rotate(4deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+  75% {
+    transform: rotate(-4deg);
   }
 }
 

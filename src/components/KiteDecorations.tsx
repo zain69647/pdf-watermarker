@@ -9,7 +9,6 @@ interface KiteProps {
   delay: number;
   duration: number;
   startX: number;
-  startY: number;
   shape: KiteShape;
 }
 
@@ -44,7 +43,7 @@ const HexagonKite = ({ color }: { color: string }) => (
   </>
 );
 
-const KiteShape = ({ shape, color }: { shape: KiteShape; color: string }) => {
+const KiteShapeComponent = ({ shape, color }: { shape: KiteShape; color: string }) => {
   switch (shape) {
     case 'box': return <BoxKite color={color} />;
     case 'delta': return <DeltaKite color={color} />;
@@ -53,7 +52,7 @@ const KiteShape = ({ shape, color }: { shape: KiteShape; color: string }) => {
   }
 };
 
-const Kite = ({ size, color, tailColor, delay, duration, startX, startY, shape }: KiteProps) => {
+const Kite = ({ size, color, tailColor, delay, duration, startX, shape }: KiteProps) => {
   return (
     <div
       className="kite-container"
@@ -61,20 +60,19 @@ const Kite = ({ size, color, tailColor, delay, duration, startX, startY, shape }
         '--kite-delay': `${delay}s`,
         '--kite-duration': `${duration}s`,
         '--kite-start-x': `${startX}%`,
-        '--kite-start-y': `${startY}%`,
         width: size,
-        height: size,
+        height: size * 1.75,
       } as React.CSSProperties}
     >
       <svg
         width={size}
-        height={size}
+        height={size * 1.75}
         viewBox="0 0 40 70"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="kite-sway"
       >
-        <KiteShape shape={shape} color={color} />
+        <KiteShapeComponent shape={shape} color={color} />
         {/* Tail */}
         <path
           d="M20 38 Q26 44 20 50 Q14 56 20 62 Q26 68 20 74"
@@ -93,12 +91,12 @@ const Kite = ({ size, color, tailColor, delay, duration, startX, startY, shape }
 };
 
 const kites: KiteProps[] = [
-  { size: 36, color: '#ef4444', tailColor: '#fbbf24', delay: 0, duration: 12, startX: 5, startY: 85, shape: 'diamond' },
-  { size: 28, color: '#3b82f6', tailColor: '#a855f7', delay: 2, duration: 14, startX: 20, startY: 90, shape: 'box' },
-  { size: 32, color: '#22c55e', tailColor: '#f97316', delay: 4, duration: 11, startX: 40, startY: 88, shape: 'delta' },
-  { size: 24, color: '#f97316', tailColor: '#ec4899', delay: 6, duration: 15, startX: 60, startY: 92, shape: 'hexagon' },
-  { size: 30, color: '#a855f7', tailColor: '#22c55e', delay: 8, duration: 13, startX: 75, startY: 86, shape: 'diamond' },
-  { size: 26, color: '#ec4899', tailColor: '#3b82f6', delay: 10, duration: 12, startX: 50, startY: 94, shape: 'box' },
+  { size: 36, color: '#ef4444', tailColor: '#fbbf24', delay: 0, duration: 10, startX: 5, shape: 'diamond' },
+  { size: 28, color: '#3b82f6', tailColor: '#a855f7', delay: 1.5, duration: 12, startX: 20, shape: 'box' },
+  { size: 32, color: '#22c55e', tailColor: '#f97316', delay: 3, duration: 9, startX: 40, shape: 'delta' },
+  { size: 24, color: '#f97316', tailColor: '#ec4899', delay: 4.5, duration: 11, startX: 60, shape: 'hexagon' },
+  { size: 30, color: '#a855f7', tailColor: '#22c55e', delay: 6, duration: 10, startX: 75, shape: 'diamond' },
+  { size: 26, color: '#ec4899', tailColor: '#3b82f6', delay: 7.5, duration: 13, startX: 50, shape: 'box' },
 ];
 
 const KiteDecorations = () => {
@@ -110,8 +108,7 @@ const KiteDecorations = () => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const isLowEnd = 
         navigator.hardwareConcurrency <= 2 ||
-        (navigator as any).deviceMemory <= 2 ||
-        /Android.*(?:4\.[0-3]|2\.|1\.)/i.test(navigator.userAgent);
+        (navigator as any).deviceMemory <= 1;
       
       setShouldRender(!prefersReducedMotion && !isLowEnd);
     };

@@ -8,7 +8,7 @@ import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedCounter from '@/components/AnimatedCounter';
-import KiteDecorations from '@/components/KiteDecorations';
+
 
 /**
  * Main PDF & Image Watermarker application
@@ -227,11 +227,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Kite Festival Decorations - behind content */}
-      <KiteDecorations />
-      
+
+
       {/* Global counter banner */}
-      <div className="bg-primary/10 backdrop-blur-sm border-b border-primary/20 px-4 py-2 relative z-10">
+      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10">
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground">

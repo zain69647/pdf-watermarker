@@ -116,10 +116,9 @@
   .drop-zone {
     @apply relative flex flex-col items-center justify-center
            rounded-2xl border-2 border-dashed
-           transition-all duration-200 ease-out cursor-pointer
-           backdrop-blur-sm;
+           transition-all duration-200 ease-out cursor-pointer;
     border-color: hsl(var(--drop-zone-border));
-    background-color: hsl(var(--drop-zone-bg) / 0.7);
+    background-color: hsl(var(--drop-zone-bg));
   }
 
   .drop-zone:hover,
@@ -136,8 +135,8 @@
 
   /* File list item */
   .file-item {
-    @apply flex items-center gap-3 p-4 rounded-xl backdrop-blur-sm;
-    background-color: hsl(var(--file-item-bg) / 0.7);
+    @apply flex items-center gap-3 p-4 rounded-xl;
+    background-color: hsl(var(--file-item-bg));
     box-shadow: var(--shadow-soft);
   }
 
@@ -242,117 +241,3 @@
   }
 }
 
-/* ============================================
-   Lahore Kite Festival Decorations
-   Lightweight CSS-only animations
-   ============================================ */
-
-.kite-decorations-layer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  pointer-events: none;
-  overflow: visible;
-  transition: opacity 0.3s ease;
-}
-
-.kite-container {
-  position: fixed;
-  left: var(--kite-start-x);
-  bottom: calc(-5vh + var(--kite-offset, 0px));
-  animation: kite-float var(--kite-duration) linear infinite;
-  animation-delay: var(--kite-delay);
-  will-change: transform;
-}
-
-/* Main floating animation - faster diagonal movement */
-@keyframes kite-float {
-  0% {
-    transform: translate(0, 0);
-    opacity: 0;
-  }
-  8% {
-    opacity: 0.9;
-  }
-  92% {
-    opacity: 0.9;
-  }
-  100% {
-    transform: translate(25vw, -110vh);
-    opacity: 0;
-  }
-}
-
-/* Sway animations - different speeds for variety */
-.kite-sway {
-  animation: kite-sway 3s ease-in-out infinite;
-  transform-origin: center center;
-}
-
-.kite-sway-slow {
-  animation: kite-sway-slow 4.5s ease-in-out infinite;
-  transform-origin: center center;
-}
-
-.kite-sway-fast {
-  animation: kite-sway-fast 2s ease-in-out infinite;
-  transform-origin: center center;
-}
-
-@keyframes kite-sway {
-  0%, 100% {
-    transform: rotate(-5deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes kite-sway-slow {
-  0%, 100% {
-    transform: rotate(-3deg) scale(1);
-  }
-  50% {
-    transform: rotate(3deg) scale(1.02);
-  }
-}
-
-@keyframes kite-sway-fast {
-  0%, 100% {
-    transform: rotate(-8deg);
-  }
-  25% {
-    transform: rotate(4deg);
-  }
-  50% {
-    transform: rotate(8deg);
-  }
-  75% {
-    transform: rotate(-4deg);
-  }
-}
-
-/* Tail wiggle animation */
-.kite-tail {
-  animation: tail-wiggle 1.5s ease-in-out infinite;
-  transform-origin: top center;
-}
-
-@keyframes tail-wiggle {
-  0%, 100% {
-    transform: translateX(-2px);
-  }
-  50% {
-    transform: translateX(2px);
-  }
-}
-
-/* Performance optimization for low-end devices */
-@media (prefers-reduced-motion: reduce) {
-  .kite-decorations-layer {
-    display: none;
-  }
-}

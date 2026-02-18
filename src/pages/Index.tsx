@@ -8,7 +8,7 @@ import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedCounter from '@/components/AnimatedCounter';
-
+import RamadanDecorations from '@/components/RamadanDecorations';
 
 /**
  * Main PDF & Image Watermarker application
@@ -228,6 +228,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
 
+      {/* ── Ramadan visual layer (behind everything) ── */}
+      <RamadanDecorations />
 
       {/* Global counter banner */}
       <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10">
@@ -248,6 +250,7 @@ const Index = () => {
           <div>
             <h1 className="text-lg font-bold text-foreground">Watermarker</h1>
             <p className="text-xs text-muted-foreground">Add watermarks to PDFs & images</p>
+            <p className="text-xs text-primary/80 font-medium mt-0.5">Ramadan Mubarak 🌙</p>
           </div>
         </div>
       </header>

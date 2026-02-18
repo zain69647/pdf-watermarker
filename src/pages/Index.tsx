@@ -246,7 +246,7 @@ const Index = () => {
       <header className="sticky top-0 z-20 bg-card/80 backdrop-blur-md border-b border-border/50 px-4 py-4">
         <div className="container max-w-lg mx-auto flex items-center gap-3">
           <div className="w-10 h-10 flex items-center justify-center">
-            <img src={puacpLogo} alt="PUACP Logo" className="w-10 h-10 object-contain" />
+            <img src={puacpLogo} alt="PUACP Logo" className="w-10 h-10 object-contain" style={{ mixBlendMode: 'multiply' }} />
           </div>
           <div>
             <h1 className="text-lg font-bold text-foreground">Watermarker</h1>

@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2, FileCheck } from 'lucide-react';
+import puacpLogo from '@/assets/puacp-logo.png';
 import DropZone from '@/components/DropZone';
 import FileList, { FileItem } from '@/components/FileList';
 import { fetchWatermarkImage, processFile } from '@/utils/pdfWatermark';
@@ -244,8 +245,8 @@ const Index = () => {
       {/* Header */}
       <header className="sticky top-0 z-20 bg-card/80 backdrop-blur-md border-b border-border/50 px-4 py-4">
         <div className="container max-w-lg mx-auto flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-            <Droplet className="w-5 h-5 text-primary-foreground" />
+          <div className="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center">
+            <img src={puacpLogo} alt="PUACP Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <h1 className="text-lg font-bold text-foreground">Watermarker</h1>

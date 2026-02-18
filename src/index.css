@@ -8,77 +8,77 @@
 
 @layer base {
   :root {
-    /* Ramadan: deep midnight purple + gold accents */
-    --background: 258 60% 8%;
-    --foreground: 45 90% 92%;
+    /* Ramadan: warm dusk teal/teal-green + gold */
+    --background: 185 35% 92%;
+    --foreground: 200 40% 15%;
 
-    --card: 258 50% 13%;
-    --card-foreground: 45 90% 92%;
+    --card: 0 0% 100%;
+    --card-foreground: 200 40% 15%;
 
-    --popover: 258 50% 13%;
-    --popover-foreground: 45 90% 92%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 40% 15%;
 
-    --primary: 42 95% 55%;
-    --primary-foreground: 258 60% 10%;
+    --primary: 36 100% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 258 35% 20%;
-    --secondary-foreground: 45 90% 92%;
+    --secondary: 185 30% 86%;
+    --secondary-foreground: 200 40% 15%;
 
-    --muted: 258 30% 22%;
-    --muted-foreground: 258 20% 62%;
+    --muted: 185 25% 84%;
+    --muted-foreground: 200 20% 45%;
 
-    --accent: 42 95% 55%;
-    --accent-foreground: 258 60% 10%;
+    --accent: 36 100% 48%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 60% 45%;
+    --success: 142 60% 38%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 258 30% 22%;
-    --input: 258 30% 22%;
-    --ring: 42 95% 55%;
+    --border: 185 25% 78%;
+    --input: 185 25% 78%;
+    --ring: 36 100% 48%;
 
     --radius: 0.75rem;
 
     /* Custom design tokens */
-    --drop-zone-border: 42 95% 55%;
-    --drop-zone-bg: 258 50% 12%;
-    --drop-zone-bg-active: 258 45% 18%;
-    --file-item-bg: 258 50% 13%;
-    --progress-bar: 42 95% 55%;
-    --shadow-soft: 0 4px 6px -1px hsl(258 60% 5% / 0.5);
-    --shadow-medium: 0 10px 15px -3px hsl(258 60% 5% / 0.6);
+    --drop-zone-border: 36 100% 48%;
+    --drop-zone-bg: 185 35% 95%;
+    --drop-zone-bg-active: 185 30% 88%;
+    --file-item-bg: 0 0% 100%;
+    --progress-bar: 36 100% 48%;
+    --shadow-soft: 0 4px 6px -1px hsl(200 40% 15% / 0.1);
+    --shadow-medium: 0 10px 15px -3px hsl(200 40% 15% / 0.15);
   }
 
   .dark {
-    --background: 258 60% 8%;
-    --foreground: 45 90% 92%;
+    --background: 185 35% 92%;
+    --foreground: 200 40% 15%;
 
-    --card: 258 50% 13%;
-    --card-foreground: 45 90% 92%;
+    --card: 0 0% 100%;
+    --card-foreground: 200 40% 15%;
 
-    --popover: 258 50% 13%;
-    --popover-foreground: 45 90% 92%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 40% 15%;
 
-    --primary: 42 95% 55%;
-    --primary-foreground: 258 60% 10%;
+    --primary: 36 100% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 258 35% 20%;
-    --secondary-foreground: 45 90% 92%;
+    --secondary: 185 30% 86%;
+    --secondary-foreground: 200 40% 15%;
 
-    --muted: 258 30% 22%;
-    --muted-foreground: 258 20% 62%;
+    --muted: 185 25% 84%;
+    --muted-foreground: 200 20% 45%;
 
-    --accent: 42 95% 55%;
-    --accent-foreground: 258 60% 10%;
+    --accent: 36 100% 48%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 63% 31%;
-    --destructive-foreground: 45 90% 92%;
+    --destructive-foreground: 0 0% 100%;
 
     --success: 142 60% 35%;
     --success-foreground: 0 0% 100%;
@@ -86,14 +86,14 @@
     --warning: 38 92% 40%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 258 30% 22%;
-    --input: 258 30% 22%;
-    --ring: 42 95% 55%;
+    --border: 185 25% 78%;
+    --input: 185 25% 78%;
+    --ring: 36 100% 48%;
 
-    --drop-zone-border: 42 95% 50%;
-    --drop-zone-bg: 258 50% 12%;
-    --drop-zone-bg-active: 258 45% 18%;
-    --file-item-bg: 258 50% 13%;
+    --drop-zone-border: 36 100% 48%;
+    --drop-zone-bg: 185 35% 95%;
+    --drop-zone-bg-active: 185 30% 88%;
+    --file-item-bg: 0 0% 100%;
   }
 }
 
@@ -211,7 +211,7 @@
    Optimized for low-end Android WebView
    ============================================ */
 
-/* Night sky gradient background — deep midnight purple */
+/* Soft dusk sky — semi-transparent so moon stays visible */
 .ramadan-bg {
   position: fixed;
   inset: 0;
@@ -219,11 +219,12 @@
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    #07031a 0%,
-    #0f0730 35%,
-    #1a0a3c 65%,
-    #120826 100%
+    #d4eef5cc 0%,
+    #b8e0ecaa 30%,
+    #e8f4f0bb 65%,
+    #f5ece0cc 100%
   );
+  opacity: 0.55;
 }
 
 /* Stars layer */
@@ -238,8 +239,8 @@
 .ramadan-star {
   position: absolute;
   border-radius: 50%;
-  background: #fff8c0;
-  box-shadow: 0 0 5px 2px #f4c54299;
+  background: #f4a800;
+  box-shadow: 0 0 5px 2px #f4c54288;
   animation: ramadan-twinkle linear infinite;
   will-change: opacity;
 }
@@ -249,20 +250,20 @@
   50%       { opacity: 0.15; }
 }
 
-/* Crescent moon */
+/* Crescent moon — larger, clearly visible */
 .ramadan-moon-wrap {
   position: fixed;
-  top: 14px;
-  right: 16px;
-  z-index: 2;
+  top: 10px;
+  right: 12px;
+  z-index: 20;
   pointer-events: none;
   animation: ramadan-moon-glow 4s ease-in-out infinite;
-  will-change: opacity;
+  will-change: filter;
 }
 
 @keyframes ramadan-moon-glow {
-  0%, 100% { filter: drop-shadow(0 0 8px #f4c54266); }
-  50%       { filter: drop-shadow(0 0 18px #f4c542bb); }
+  0%, 100% { filter: drop-shadow(0 0 10px #f4a80099); }
+  50%       { filter: drop-shadow(0 0 22px #f4a800dd); }
 }
 
 /* Mosque silhouette */
@@ -273,7 +274,7 @@
   right: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.75;
+  opacity: 0.18;
 }
 
 .ramadan-mosque {

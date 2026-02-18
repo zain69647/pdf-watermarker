@@ -52,18 +52,18 @@ const RamadanDecorations = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <clipPath id="crescent-clip">
-              <circle cx="40" cy="40" r="32" />
-            </clipPath>
             <radialGradient id="moon-grad" cx="35%" cy="35%" r="65%">
               <stop offset="0%" stopColor="#ffe066" />
               <stop offset="100%" stopColor="#f4a800" />
             </radialGradient>
+            <mask id="crescent-mask">
+              {/* White = show, Black = hide */}
+              <circle cx="40" cy="40" r="32" fill="white" />
+              <circle cx="53" cy="30" r="27" fill="black" />
+            </mask>
           </defs>
-          {/* Full golden circle */}
-          <circle cx="40" cy="40" r="32" fill="url(#moon-grad)" clipPath="url(#crescent-clip)" />
-          {/* Punch-out: offset circle creates the crescent shape */}
-          <circle cx="53" cy="30" r="27" fill="#c8e8f0" clipPath="url(#crescent-clip)" />
+          {/* Crescent shape via mask (punch-out is transparent) */}
+          <circle cx="40" cy="40" r="32" fill="url(#moon-grad)" mask="url(#crescent-mask)" />
           {/* Glow ring */}
           <circle cx="40" cy="40" r="32" stroke="#f4a80055" strokeWidth="2.5" fill="none" />
         </svg>

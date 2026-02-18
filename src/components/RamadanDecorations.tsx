@@ -42,34 +42,30 @@ const RamadanDecorations = () => {
         ))}
       </div>
 
-      {/* Crescent moon — top right, using clipPath for a true crescent */}
+      {/* Crescent moon — larger, gold, clearly visible */}
       <div className="ramadan-moon-wrap" aria-hidden="true">
         <svg
-          width="64"
-          height="64"
-          viewBox="0 0 64 64"
+          width="80"
+          height="80"
+          viewBox="0 0 80 80"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
             <clipPath id="crescent-clip">
-              {/* Show the big circle... */}
-              <circle cx="32" cy="32" r="26" />
+              <circle cx="40" cy="40" r="32" />
             </clipPath>
-            <radialGradient id="moon-grad" cx="40%" cy="40%" r="60%">
-              <stop offset="0%" stopColor="#fff8c0" />
-              <stop offset="100%" stopColor="#f4c542" />
+            <radialGradient id="moon-grad" cx="35%" cy="35%" r="65%">
+              <stop offset="0%" stopColor="#ffe066" />
+              <stop offset="100%" stopColor="#f4a800" />
             </radialGradient>
           </defs>
-
-          {/* Full golden circle, clipped to big circle */}
-          <circle cx="32" cy="32" r="26" fill="url(#moon-grad)" clipPath="url(#crescent-clip)" />
-
-          {/* Punch out the crescent shadow (offset circle = crescent shape) */}
-          <circle cx="42" cy="24" r="22" fill="#1a0a3c" clipPath="url(#crescent-clip)" />
-
-          {/* Soft glow ring */}
-          <circle cx="32" cy="32" r="26" stroke="#f4c54260" strokeWidth="2" fill="none" />
+          {/* Full golden circle */}
+          <circle cx="40" cy="40" r="32" fill="url(#moon-grad)" clipPath="url(#crescent-clip)" />
+          {/* Punch-out: offset circle creates the crescent shape */}
+          <circle cx="53" cy="30" r="27" fill="#c8e8f0" clipPath="url(#crescent-clip)" />
+          {/* Glow ring */}
+          <circle cx="40" cy="40" r="32" stroke="#f4a80055" strokeWidth="2.5" fill="none" />
         </svg>
       </div>
 
@@ -82,49 +78,49 @@ const RamadanDecorations = () => {
           className="ramadan-mosque"
         >
           {/* Far left small minaret */}
-          <rect x="30"  y="80"  width="18" height="140" rx="2" fill="#1a0a3c" />
-          <ellipse cx="39"  cy="80"  rx="9"  ry="18" fill="#1a0a3c" />
-          <rect x="36"  y="58"  width="6"  height="12" fill="#1a0a3c" />
-          <polygon points="39,42 36,58 42,58" fill="#1a0a3c" />
+          <rect x="30"  y="80"  width="18" height="140" rx="2" fill="#2a7a8a" />
+          <ellipse cx="39"  cy="80"  rx="9"  ry="18" fill="#2a7a8a" />
+          <rect x="36"  y="58"  width="6"  height="12" fill="#2a7a8a" />
+          <polygon points="39,42 36,58 42,58" fill="#2a7a8a" />
 
           {/* Left minaret */}
-          <rect x="120" y="55"  width="22" height="165" rx="2" fill="#1a0a3c" />
-          <ellipse cx="131" cy="55"  rx="11" ry="22" fill="#1a0a3c" />
-          <rect x="128" y="30"  width="6"  height="14" fill="#1a0a3c" />
-          <polygon points="131,12 127,30 135,30" fill="#1a0a3c" />
+          <rect x="120" y="55"  width="22" height="165" rx="2" fill="#2a7a8a" />
+          <ellipse cx="131" cy="55"  rx="11" ry="22" fill="#2a7a8a" />
+          <rect x="128" y="30"  width="6"  height="14" fill="#2a7a8a" />
+          <polygon points="131,12 127,30 135,30" fill="#2a7a8a" />
 
           {/* Centre main dome */}
-          <rect x="200" y="100" width="400" height="120" rx="4" fill="#1a0a3c" />
-          <ellipse cx="400" cy="100" rx="130" ry="70" fill="#1a0a3c" />
+          <rect x="200" y="100" width="400" height="120" rx="4" fill="#2a7a8a" />
+          <ellipse cx="400" cy="100" rx="130" ry="70" fill="#2a7a8a" />
 
           {/* Flanking domes */}
-          <ellipse cx="270" cy="115" rx="60"  ry="38" fill="#1a0a3c" />
-          <ellipse cx="530" cy="115" rx="60"  ry="38" fill="#1a0a3c" />
+          <ellipse cx="270" cy="115" rx="60"  ry="38" fill="#2a7a8a" />
+          <ellipse cx="530" cy="115" rx="60"  ry="38" fill="#2a7a8a" />
 
           {/* Arched doorway */}
-          <ellipse cx="400" cy="220" rx="28" ry="40" fill="#2a1260" />
-          <rect x="372" y="200" width="56" height="30" fill="#2a1260" />
+          <ellipse cx="400" cy="220" rx="28" ry="40" fill="#1d5e6e" />
+          <rect x="372" y="200" width="56" height="30" fill="#1d5e6e" />
 
           {/* Windows */}
-          <ellipse cx="300" cy="145" rx="12" ry="16" fill="#2a1260" />
-          <ellipse cx="500" cy="145" rx="12" ry="16" fill="#2a1260" />
-          <ellipse cx="350" cy="135" rx="10" ry="14" fill="#2a1260" />
-          <ellipse cx="450" cy="135" rx="10" ry="14" fill="#2a1260" />
+          <ellipse cx="300" cy="145" rx="12" ry="16" fill="#1d5e6e" />
+          <ellipse cx="500" cy="145" rx="12" ry="16" fill="#1d5e6e" />
+          <ellipse cx="350" cy="135" rx="10" ry="14" fill="#1d5e6e" />
+          <ellipse cx="450" cy="135" rx="10" ry="14" fill="#1d5e6e" />
 
           {/* Right minaret */}
-          <rect x="658" y="55"  width="22" height="165" rx="2" fill="#1a0a3c" />
-          <ellipse cx="669" cy="55"  rx="11" ry="22" fill="#1a0a3c" />
-          <rect x="666" y="30"  width="6"  height="14" fill="#1a0a3c" />
-          <polygon points="669,12 665,30 673,30" fill="#1a0a3c" />
+          <rect x="658" y="55"  width="22" height="165" rx="2" fill="#2a7a8a" />
+          <ellipse cx="669" cy="55"  rx="11" ry="22" fill="#2a7a8a" />
+          <rect x="666" y="30"  width="6"  height="14" fill="#2a7a8a" />
+          <polygon points="669,12 665,30 673,30" fill="#2a7a8a" />
 
           {/* Far right small minaret */}
-          <rect x="752" y="80"  width="18" height="140" rx="2" fill="#1a0a3c" />
-          <ellipse cx="761" cy="80"  rx="9"  ry="18" fill="#1a0a3c" />
-          <rect x="758" y="58"  width="6"  height="12" fill="#1a0a3c" />
-          <polygon points="761,42 757,58 765,58" fill="#1a0a3c" />
+          <rect x="752" y="80"  width="18" height="140" rx="2" fill="#2a7a8a" />
+          <ellipse cx="761" cy="80"  rx="9"  ry="18" fill="#2a7a8a" />
+          <rect x="758" y="58"  width="6"  height="12" fill="#2a7a8a" />
+          <polygon points="761,42 757,58 765,58" fill="#2a7a8a" />
 
           {/* Ground */}
-          <rect x="0" y="218" width="800" height="4" fill="#1a0a3c" />
+          <rect x="0" y="218" width="800" height="4" fill="#2a7a8a" />
         </svg>
       </div>
     </>

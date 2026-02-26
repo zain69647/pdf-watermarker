@@ -239,7 +239,7 @@ const Index = () => {
           <div>
             <h1 className="text-lg font-bold text-foreground">Watermarker</h1>
             <p className="text-xs text-muted-foreground">Add watermarks to PDFs & images</p>
-            <p className="text-xs text-primary/80 font-medium mt-0.5">Ramadan Mubarak 🌙</p>
+            
           </div>
         </div>
       </header>

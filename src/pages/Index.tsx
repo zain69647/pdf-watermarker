@@ -178,23 +178,11 @@ const Index = () => {
       
       setProcessedFiles(results);
       
-      // Update global counter in database
+      // Update global counter atomically
       if (results.length > 0) {
-        const { data: currentData } = await supabase
-          .from('global_stats')
-          .select('total_watermarked')
-          .eq('id', 'main')
-          .single();
-        
-        if (currentData) {
-          await supabase
-            .from('global_stats')
-            .update({ 
-              total_watermarked: currentData.total_watermarked + results.length,
-              updated_at: new Date().toISOString()
-            })
-            .eq('id', 'main');
-        }
+        await supabase.rpc('increment_watermark_counter', {
+          increment_by: results.length
+        });
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

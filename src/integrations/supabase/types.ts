@@ -37,7 +37,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      increment_watermark_counter: {
+        Args: { increment_by: number }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never

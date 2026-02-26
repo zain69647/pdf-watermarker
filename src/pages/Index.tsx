@@ -423,12 +423,13 @@ const Index = () => {
         href="https://wa.me/923294557142?text=Hi!%20I%20have%20a%20suggestion%20for%20the%20Watermarker%20app"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20bd5a] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+        className="fixed bottom-5 right-5 z-50 flex items-center gap-1.5 bg-[#25D366] hover:bg-[#20bd5a] rounded-full pl-2.5 pr-3.5 py-1.5 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         aria-label="Chat on WhatsApp"
       >
-        <svg viewBox="0 0 32 32" className="w-7 h-7 fill-white">
+        <svg viewBox="0 0 32 32" className="w-5 h-5 fill-white flex-shrink-0">
           <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.742 3.052 9.376L1.056 31.2l6.012-1.97A15.89 15.89 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.35 22.614c-.392 1.1-1.946 2.014-3.186 2.282-.852.18-1.964.324-5.71-1.228-4.796-1.986-7.876-6.856-8.114-7.174-.228-.318-1.918-2.554-1.918-4.872s1.214-3.456 1.644-3.928c.43-.472.94-.59 1.254-.59.314 0 .628.002.902.016.29.014.678-.11 1.06.81.392.942 1.332 3.26 1.45 3.496.118.236.196.512.04.83-.158.318-.236.512-.472.79-.236.276-.496.616-.708.826-.236.236-.482.492-.208.964.276.472 1.224 2.02 2.63 3.272 1.81 1.612 3.336 2.11 3.808 2.346.472.236.748.198 1.024-.118.276-.318 1.178-1.374 1.492-1.846.314-.472.628-.392 1.06-.236.43.158 2.746 1.296 3.218 1.532.472.236.786.354.904.55.118.196.118 1.14-.274 2.24z"/>
         </svg>
+        <span className="text-white text-xs font-medium">Feedback</span>
       </a>
 
       {/* Footer */}

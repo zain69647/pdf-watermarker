@@ -201,7 +201,7 @@ const Index = () => {
     } finally {
       setIsProcessing(false);
     }
-  }, [files, isProcessing]);
+  }, [files, isProcessing, watermarkSize, watermarkOpacity]);
 
   // Download processed files
   const handleDownload = useCallback(async () => {

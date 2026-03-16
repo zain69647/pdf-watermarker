@@ -9,7 +9,6 @@ import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedCounter from '@/components/AnimatedCounter';
-import RamadanDecorations from '@/components/RamadanDecorations';
 
 /**
  * Main PDF & Image Watermarker application

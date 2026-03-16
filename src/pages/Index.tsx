@@ -216,9 +216,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
 
-      {/* ── Ramadan visual layer (behind everything) ── */}
-      <RamadanDecorations />
-
       {/* Global counter banner */}
       <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10">
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">

@@ -217,7 +217,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative">
 
       {/* Global counter banner */}
-      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10">
+      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
           <FileCheck className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-foreground">
@@ -227,7 +227,7 @@ const Index = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-border/30 px-4 py-4 bg-transparent">
+      <header className="sticky top-0 z-20 border-b border-border/30 px-4 py-4 bg-background/80 backdrop-blur-md animate-fade-in-up" style={{ animationDelay: '50ms' }}>
         <div className="container max-w-lg mx-auto flex items-center gap-3">
           <div className="w-14 h-14 flex items-center justify-center">
             <img src={puacpLogo} alt="PUACP Logo" className="w-14 h-14 object-contain" style={{ mixBlendMode: 'multiply' }} />
@@ -268,13 +268,15 @@ const Index = () => {
         )}
 
         {/* Drop zone */}
-        <DropZone 
-          onFilesSelected={handleFilesSelected} 
-          disabled={isProcessing || watermarkAvailable === false}
-        />
+        <div className="animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+          <DropZone 
+            onFilesSelected={handleFilesSelected} 
+            disabled={isProcessing || watermarkAvailable === false}
+          />
+        </div>
 
         {/* Watermark settings */}
-        <div className="space-y-4 p-4 rounded-xl bg-card/70 backdrop-blur-sm border border-border/50">
+        <div className="space-y-4 p-4 rounded-xl bg-card/70 backdrop-blur-sm border border-border/50 animate-fade-in-up transition-all duration-300 hover:shadow-lg hover:border-primary/20" style={{ animationDelay: '150ms' }}>
           {/* Size control */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -327,7 +329,7 @@ const Index = () => {
 
         {/* Action buttons */}
         {files.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-3 animate-fade-in-up">
             {/* Process button */}
             {pendingCount > 0 && (
               <button

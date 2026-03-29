@@ -329,7 +329,7 @@ const Index = () => {
 
         {/* Action buttons */}
         {files.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-3 animate-fade-in-up">
             {/* Process button */}
             {pendingCount > 0 && (
               <button

@@ -214,7 +214,7 @@ const Index = () => {
   const hasErrors = files.some(f => f.status === 'error');
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen relative" style={{ background: 'linear-gradient(160deg, hsl(205 30% 97%) 0%, hsl(205 40% 92%) 50%, hsl(215 35% 90%) 100%)' }}>
 
       {/* Global counter banner */}
       <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10 animate-fade-in-up" style={{ animationDelay: '0ms' }}>

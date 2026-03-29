@@ -220,7 +220,8 @@ const Index = () => {
       <div
         className="px-4 py-2.5 relative z-10 animate-fade-in-up"
         style={{
-          background: 'linear-gradient(90deg, #4F46E5, #22C55E)',
+          background: 'linear-gradient(90deg, #2563EB, #22C55E)',
+          boxShadow: '0 2px 10px rgba(37, 99, 235, 0.2)',
           animationDelay: '0ms',
         }}
       >
@@ -233,13 +234,16 @@ const Index = () => {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-border/50 px-4 py-4 bg-card/90 backdrop-blur-md animate-fade-in-up" style={{ animationDelay: '50ms' }}>
+      <header
+        className="sticky top-0 z-20 border-b border-border px-4 py-4 bg-card/95 backdrop-blur-md animate-fade-in-up"
+        style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)', animationDelay: '50ms' }}
+      >
         <div className="container max-w-lg mx-auto flex items-center gap-3">
-          <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/10">
-            <img src={puacpLogo} alt="PUACP Logo" className="w-12 h-12 object-contain" style={{ filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
+          <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/5">
+            <img src={puacpLogo} alt="PUACP Logo" className="w-12 h-12 object-contain" style={{ mixBlendMode: 'multiply' }} />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground">Watermarker</h1>
+            <h1 className="text-xl font-bold text-foreground">Watermarker</h1>
             <p className="text-xs text-muted-foreground">Add watermarks to PDFs & images</p>
           </div>
         </div>
@@ -250,7 +254,7 @@ const Index = () => {
         
         {/* Warning if watermark not available */}
         {watermarkAvailable === false && (
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-warning/10 border border-warning/20">
+          <div className="flex items-start gap-3 p-4 rounded-2xl bg-warning/10 border border-warning/20">
             <AlertTriangle className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-foreground">Watermark logo missing</p>
@@ -263,7 +267,7 @@ const Index = () => {
 
         {/* Error message */}
         {error && (
-          <div className="flex items-start gap-3 p-4 rounded-xl bg-destructive/10 border border-destructive/20">
+          <div className="flex items-start gap-3 p-4 rounded-2xl bg-destructive/10 border border-destructive/20">
             <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-foreground">Error</p>
@@ -281,8 +285,11 @@ const Index = () => {
         </div>
 
         {/* Watermark settings */}
-        <div className="space-y-4 p-5 rounded-xl bg-card border border-border/50 animate-fade-in-up transition-all duration-300 hover:border-primary/30" style={{ animationDelay: '150ms', boxShadow: '0 4px 20px rgba(0,0,0,0.25)' }}>
-          <h3 className="text-sm font-semibold text-foreground tracking-wide uppercase opacity-70">Settings</h3>
+        <div
+          className="space-y-4 p-5 rounded-2xl bg-card border border-border animate-fade-in-up transition-all duration-300 hover:border-primary/20"
+          style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.05)', animationDelay: '150ms' }}
+        >
+          <h3 className="text-xs font-semibold text-muted-foreground tracking-widest uppercase">Settings</h3>
           {/* Size control */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -351,7 +358,7 @@ const Index = () => {
             {/* Success message and download */}
             {processedFiles.length > 0 && (
               <div className="space-y-3">
-                <div className="flex items-center gap-2 p-3 rounded-xl bg-success/10 border border-success/20">
+                <div className="flex items-center gap-2 p-3 rounded-2xl bg-success/10 border border-success/20">
                   <CheckCircle2 className="w-5 h-5 text-success" />
                   <span className="text-sm font-medium text-foreground">
                     {completeCount} file{completeCount !== 1 ? 's' : ''} processed successfully!
@@ -405,19 +412,12 @@ const Index = () => {
           </div>
         )}
 
-
         {/* Info section */}
-        <div className="pt-4 border-t border-border/30">
+        <div className="pt-4 border-t border-border">
           <div className="text-center space-y-2">
-            <p className="text-xs text-muted-foreground">
-              ✓ Works offline after loading
-            </p>
-            <p className="text-xs text-muted-foreground">
-              ✓ Files processed locally - nothing uploaded
-            </p>
-            <p className="text-xs text-muted-foreground">
-              ✓ Original quality preserved
-            </p>
+            <p className="text-xs text-muted-foreground">✓ Works offline after loading</p>
+            <p className="text-xs text-muted-foreground">✓ Files processed locally - nothing uploaded</p>
+            <p className="text-xs text-muted-foreground">✓ Original quality preserved</p>
           </div>
         </div>
       </main>
@@ -437,7 +437,7 @@ const Index = () => {
       </a>
 
       {/* Footer */}
-      <footer className="border-t border-border/30 mt-auto relative z-10 bg-card/60 backdrop-blur-sm">
+      <footer className="border-t border-border mt-auto relative z-10" style={{ backgroundColor: '#F1F5F9' }}>
         <div className="container max-w-lg mx-auto px-4 py-4 text-center">
           <p className="text-xs text-muted-foreground">
             No ads • No tracking • No data collection

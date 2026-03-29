@@ -268,13 +268,15 @@ const Index = () => {
         )}
 
         {/* Drop zone */}
-        <DropZone 
-          onFilesSelected={handleFilesSelected} 
-          disabled={isProcessing || watermarkAvailable === false}
-        />
+        <div className="animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+          <DropZone 
+            onFilesSelected={handleFilesSelected} 
+            disabled={isProcessing || watermarkAvailable === false}
+          />
+        </div>
 
         {/* Watermark settings */}
-        <div className="space-y-4 p-4 rounded-xl bg-card/70 backdrop-blur-sm border border-border/50">
+        <div className="space-y-4 p-4 rounded-xl bg-card/70 backdrop-blur-sm border border-border/50 animate-fade-in-up transition-all duration-300 hover:shadow-lg hover:border-primary/20" style={{ animationDelay: '150ms' }}>
           {/* Size control */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">

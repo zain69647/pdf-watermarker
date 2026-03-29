@@ -2,97 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* PDF Watermarker Design System - Clean, Professional, Mobile-First */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* Light blue theme */
-    --background: 205 30% 96%;
-    --foreground: 210 30% 12%;
+    /* Dark SaaS Theme */
+    --background: 222 47% 11%;
+    --foreground: 215 28% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 30% 12%;
+    --card: 217 33% 17%;
+    --card-foreground: 215 28% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 30% 12%;
+    --popover: 217 33% 17%;
+    --popover-foreground: 215 28% 90%;
 
-    --primary: 205 85% 50%;
+    --primary: 244 63% 58%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 205 20% 90%;
-    --secondary-foreground: 210 30% 12%;
+    --secondary: 217 33% 22%;
+    --secondary-foreground: 215 28% 90%;
 
-    --muted: 205 15% 88%;
-    --muted-foreground: 210 10% 45%;
+    --muted: 217 25% 22%;
+    --muted-foreground: 215 16% 65%;
 
-    --accent: 205 85% 50%;
+    --accent: 142 71% 45%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 152 60% 40%;
+    --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 205 15% 84%;
-    --input: 205 15% 84%;
-    --ring: 205 85% 50%;
+    --border: 217 25% 27%;
+    --input: 217 25% 27%;
+    --ring: 244 63% 58%;
 
     --radius: 0.75rem;
 
-    --drop-zone-border: 205 85% 50%;
-    --drop-zone-bg: 205 30% 97%;
-    --drop-zone-bg-active: 205 40% 93%;
-    --file-item-bg: 0 0% 100%;
-    --progress-bar: 205 85% 50%;
-    --shadow-soft: 0 4px 6px -1px hsl(210 30% 12% / 0.06);
-    --shadow-medium: 0 10px 25px -5px hsl(205 85% 50% / 0.15);
-  }
-
-  .dark {
-    --background: 224 30% 10%;
-    --foreground: 220 14% 90%;
-
-    --card: 224 25% 14%;
-    --card-foreground: 220 14% 90%;
-
-    --popover: 224 25% 14%;
-    --popover-foreground: 220 14% 90%;
-
-    --primary: 250 70% 62%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 224 20% 20%;
-    --secondary-foreground: 220 14% 90%;
-
-    --muted: 224 15% 22%;
-    --muted-foreground: 220 10% 55%;
-
-    --accent: 250 70% 62%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 100%;
-
-    --success: 152 60% 35%;
-    --success-foreground: 0 0% 100%;
-
-    --warning: 38 92% 40%;
-    --warning-foreground: 0 0% 100%;
-
-    --border: 224 15% 22%;
-    --input: 224 15% 22%;
-    --ring: 250 70% 62%;
-
-    --drop-zone-border: 250 70% 62%;
-    --drop-zone-bg: 224 25% 12%;
-    --drop-zone-bg-active: 250 30% 18%;
-    --file-item-bg: 224 25% 14%;
+    --drop-zone-border: 244 63% 58%;
+    --drop-zone-bg: 222 47% 13%;
+    --drop-zone-bg-active: 244 30% 18%;
+    --file-item-bg: 217 33% 17%;
+    --progress-bar: 142 71% 45%;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 10px 25px -5px rgba(79, 70, 229, 0.25);
   }
 }
 
@@ -112,7 +69,6 @@
 }
 
 @layer components {
-  /* Drop zone styles */
   .drop-zone {
     @apply relative flex flex-col items-center justify-center
            rounded-2xl border-2 border-dashed
@@ -123,24 +79,27 @@
 
   .drop-zone:hover,
   .drop-zone.dragging {
-    background-color: hsl(var(--drop-zone-bg-active) / 0.8);
+    background-color: hsl(var(--drop-zone-bg-active));
     border-color: hsl(var(--primary));
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.15);
     transform: scale(1.01);
   }
 
   .drop-zone.dragging {
     @apply ring-4;
-    ring-color: hsl(var(--primary) / 0.2);
+    ring-color: hsl(var(--primary) / 0.3);
   }
 
-  /* File list item */
   .file-item {
-    @apply flex items-center gap-3 p-4 rounded-xl;
+    @apply flex items-center gap-3 p-4 rounded-xl transition-all duration-200;
     background-color: hsl(var(--file-item-bg));
     box-shadow: var(--shadow-soft);
   }
 
-  /* Progress bar */
+  .file-item:hover {
+    box-shadow: var(--shadow-medium);
+  }
+
   .progress-bar {
     @apply h-2 rounded-full overflow-hidden;
     background-color: hsl(var(--muted));
@@ -151,7 +110,6 @@
     background-color: hsl(var(--progress-bar));
   }
 
-  /* Action button styles */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
            px-6 py-4 rounded-xl font-semibold text-base
@@ -159,12 +117,13 @@
            disabled:opacity-50 disabled:cursor-not-allowed;
     background-color: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
   }
 
   .btn-primary:hover:not(:disabled) {
+    filter: brightness(1.15);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
   }
 
   .btn-primary:active:not(:disabled) {
@@ -174,7 +133,7 @@
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2
            px-6 py-4 rounded-xl font-semibold text-base
-           transition-all duration-200 ease-out border-2;
+           transition-all duration-200 ease-out border;
     border-color: hsl(var(--border));
     background-color: hsl(var(--card));
     color: hsl(var(--foreground));
@@ -182,9 +141,9 @@
 
   .btn-secondary:hover {
     background-color: hsl(var(--secondary));
+    border-color: hsl(var(--primary) / 0.5);
   }
 
-  /* Status badges */
   .badge-success {
     @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium;
     background-color: hsl(var(--success) / 0.15);
@@ -204,28 +163,20 @@
   }
 }
 
-
 @layer utilities {
-  /* Smooth scroll on touch devices */
   .touch-scroll {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Pulse animation for processing state */
   @keyframes pulse-soft {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.6;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
   }
 
   .animate-pulse-soft {
     animation: pulse-soft 2s ease-in-out infinite;
   }
 
-  /* Fade in animation */
   @keyframes fade-in-up {
     from {
       opacity: 0;
@@ -241,4 +192,3 @@
     animation: fade-in-up 0.3s ease-out forwards;
   }
 }
-

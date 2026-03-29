@@ -214,28 +214,33 @@ const Index = () => {
   const hasErrors = files.some(f => f.status === 'error');
 
   return (
-    <div className="min-h-screen relative" style={{ background: 'linear-gradient(160deg, hsl(205 30% 97%) 0%, hsl(205 40% 92%) 50%, hsl(215 35% 90%) 100%)' }}>
+    <div className="min-h-screen bg-background">
 
       {/* Global counter banner */}
-      <div className="bg-primary/10 border-b border-primary/20 px-4 py-2 relative z-10 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
+      <div
+        className="px-4 py-2.5 relative z-10 animate-fade-in-up"
+        style={{
+          background: 'linear-gradient(90deg, #4F46E5, #22C55E)',
+          animationDelay: '0ms',
+        }}
+      >
         <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
-          <FileCheck className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-foreground">
-            <AnimatedCounter value={totalWatermarked} className="text-primary font-bold" /> files watermarked globally
+          <FileCheck className="w-4 h-4 text-white" />
+          <span className="text-sm font-medium text-white">
+            <AnimatedCounter value={totalWatermarked} className="font-bold text-white" /> files watermarked globally
           </span>
         </div>
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-border/30 px-4 py-4 bg-background/80 backdrop-blur-md animate-fade-in-up" style={{ animationDelay: '50ms' }}>
+      <header className="sticky top-0 z-20 border-b border-border/50 px-4 py-4 bg-card/90 backdrop-blur-md animate-fade-in-up" style={{ animationDelay: '50ms' }}>
         <div className="container max-w-lg mx-auto flex items-center gap-3">
-          <div className="w-14 h-14 flex items-center justify-center">
-            <img src={puacpLogo} alt="PUACP Logo" className="w-14 h-14 object-contain" style={{ mixBlendMode: 'multiply' }} />
+          <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/10">
+            <img src={puacpLogo} alt="PUACP Logo" className="w-12 h-12 object-contain" style={{ filter: 'brightness(0) invert(1)', opacity: 0.9 }} />
           </div>
           <div>
             <h1 className="text-lg font-bold text-foreground">Watermarker</h1>
             <p className="text-xs text-muted-foreground">Add watermarks to PDFs & images</p>
-            
           </div>
         </div>
       </header>
@@ -276,12 +281,13 @@ const Index = () => {
         </div>
 
         {/* Watermark settings */}
-        <div className="space-y-4 p-4 rounded-xl bg-card/70 backdrop-blur-sm border border-border/50 animate-fade-in-up transition-all duration-300 hover:shadow-lg hover:border-primary/20" style={{ animationDelay: '150ms' }}>
+        <div className="space-y-4 p-5 rounded-xl bg-card border border-border/50 animate-fade-in-up transition-all duration-300 hover:border-primary/30" style={{ animationDelay: '150ms', boxShadow: '0 4px 20px rgba(0,0,0,0.25)' }}>
+          <h3 className="text-sm font-semibold text-foreground tracking-wide uppercase opacity-70">Settings</h3>
           {/* Size control */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-foreground">Watermark Size</label>
-              <span className="text-sm text-muted-foreground">{watermarkSize}px</span>
+              <span className="text-sm text-muted-foreground tabular-nums">{watermarkSize}px</span>
             </div>
             <Slider
               value={[watermarkSize]}
@@ -302,7 +308,7 @@ const Index = () => {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-foreground">Watermark Opacity</label>
-              <span className="text-sm text-muted-foreground">{watermarkOpacity}%</span>
+              <span className="text-sm text-muted-foreground tabular-nums">{watermarkOpacity}%</span>
             </div>
             <Slider
               value={[watermarkOpacity]}
@@ -401,7 +407,7 @@ const Index = () => {
 
 
         {/* Info section */}
-        <div className="pt-4 border-t border-border">
+        <div className="pt-4 border-t border-border/30">
           <div className="text-center space-y-2">
             <p className="text-xs text-muted-foreground">
               ✓ Works offline after loading
@@ -431,7 +437,7 @@ const Index = () => {
       </a>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 mt-auto relative z-10 bg-card/60 backdrop-blur-sm">
+      <footer className="border-t border-border/30 mt-auto relative z-10 bg-card/60 backdrop-blur-sm">
         <div className="container max-w-lg mx-auto px-4 py-4 text-center">
           <p className="text-xs text-muted-foreground">
             No ads • No tracking • No data collection

@@ -6,24 +6,23 @@
 
 @layer base {
   :root {
-    /* Dark SaaS Theme */
-    --background: 222 47% 11%;
-    --foreground: 215 28% 90%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 217 33% 17%;
-    --card-foreground: 215 28% 90%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 217 33% 17%;
-    --popover-foreground: 215 28% 90%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 244 63% 58%;
+    --primary: 217 91% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 217 33% 22%;
-    --secondary-foreground: 215 28% 90%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 217 25% 22%;
-    --muted-foreground: 215 16% 65%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
     --accent: 142 71% 45%;
     --accent-foreground: 0 0% 100%;
@@ -37,19 +36,20 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 217 25% 27%;
-    --input: 217 25% 27%;
-    --ring: 244 63% 58%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 53%;
 
     --radius: 0.75rem;
 
-    --drop-zone-border: 244 63% 58%;
-    --drop-zone-bg: 222 47% 13%;
-    --drop-zone-bg-active: 244 30% 18%;
-    --file-item-bg: 217 33% 17%;
+    --drop-zone-border: 217 91% 53%;
+    --drop-zone-bg: 217 91% 53% / 0.04;
+    --drop-zone-bg-active: 217 91% 53% / 0.08;
+    --file-item-bg: 0 0% 100%;
     --progress-bar: 142 71% 45%;
-    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 10px 25px -5px rgba(79, 70, 229, 0.25);
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+    --shadow-medium: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -81,13 +81,13 @@
   .drop-zone.dragging {
     background-color: hsl(var(--drop-zone-bg-active));
     border-color: hsl(var(--primary));
-    box-shadow: 0 0 20px rgba(79, 70, 229, 0.15);
+    box-shadow: 0 0 0 4px hsl(var(--primary) / 0.1);
     transform: scale(1.01);
   }
 
   .drop-zone.dragging {
     @apply ring-4;
-    ring-color: hsl(var(--primary) / 0.3);
+    ring-color: hsl(var(--primary) / 0.15);
   }
 
   .file-item {
@@ -102,7 +102,7 @@
 
   .progress-bar {
     @apply h-2 rounded-full overflow-hidden;
-    background-color: hsl(var(--muted));
+    background-color: hsl(var(--border));
   }
 
   .progress-bar-fill {
@@ -117,13 +117,13 @@
            disabled:opacity-50 disabled:cursor-not-allowed;
     background-color: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
-    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
   }
 
   .btn-primary:hover:not(:disabled) {
-    filter: brightness(1.15);
+    filter: brightness(0.92);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
   }
 
   .btn-primary:active:not(:disabled) {
@@ -137,28 +137,29 @@
     border-color: hsl(var(--border));
     background-color: hsl(var(--card));
     color: hsl(var(--foreground));
+    box-shadow: var(--shadow-soft);
   }
 
   .btn-secondary:hover {
     background-color: hsl(var(--secondary));
-    border-color: hsl(var(--primary) / 0.5);
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   .badge-success {
     @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium;
-    background-color: hsl(var(--success) / 0.15);
+    background-color: hsl(var(--success) / 0.1);
     color: hsl(var(--success));
   }
 
   .badge-warning {
     @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium;
-    background-color: hsl(var(--warning) / 0.15);
+    background-color: hsl(var(--warning) / 0.1);
     color: hsl(var(--warning));
   }
 
   .badge-error {
     @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium;
-    background-color: hsl(var(--destructive) / 0.15);
+    background-color: hsl(var(--destructive) / 0.1);
     color: hsl(var(--destructive));
   }
 }

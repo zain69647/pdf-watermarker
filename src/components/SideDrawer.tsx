@@ -9,7 +9,6 @@ const sections = [
     items: [
       { name: 'CGPA Predictor', url: 'https://cgpa-predictor-mu.vercel.app/', icon: BarChart3 },
       { name: 'Regression Analysis', url: 'https://reg-ananlysis.vercel.app/', icon: BarChart3 },
-      { name: 'PU Papers Finder', url: 'https://pu-eosin.vercel.app/', icon: FileText },
       { name: 'Paper Finder', url: 'https://paper-finder.great-site.net/', icon: Search },
     ],
   },

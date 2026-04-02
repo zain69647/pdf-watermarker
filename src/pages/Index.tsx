@@ -9,6 +9,7 @@ import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import SideDrawer from '@/components/SideDrawer';
 
 /**
  * Main PDF & Image Watermarker application
@@ -239,6 +240,7 @@ const Index = () => {
         style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)', animationDelay: '50ms' }}
       >
         <div className="container max-w-lg mx-auto flex items-center gap-3">
+          <SideDrawer />
           <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/5">
             <img src={puacpLogo} alt="PUACP Logo" className="w-12 h-12 object-contain" style={{ mixBlendMode: 'multiply' }} />
           </div>

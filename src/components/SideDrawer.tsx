@@ -8,7 +8,7 @@ const projects = [
   { name: 'PU Papers Finder', url: 'https://pu-eosin.vercel.app/' },
   { name: 'Google Drive Cloner', url: 'https://script.google.com/macros/s/AKfycbxCvap_uQ-PUlJIJ6jK37qXF-UvZvn0IfNJ8JlL0eKViQYHbPaRgtG_RFLY6R6Ax8id/exec' },
   { name: 'Age Calculator', url: 'https://age-calculator-alpha-roan.vercel.app/' },
-  { name: 'GitHub Profile', url: 'https://github.com/zain69647/global-visitor-hug' },
+  
   { name: 'Live Visitor Counter', url: 'https://couner.vercel.app/' },
   { name: 'Year Progress Tracker', url: 'https://year-unveiled.vercel.app/' },
   { name: 'PDF Tool', url: 'https://pdf-page-master.vercel.app/' },

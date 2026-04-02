@@ -28,6 +28,7 @@ const sections = [
     icon: Sparkles,
     items: [
       { name: 'Ludo Game', url: 'https://ludo-topaz.vercel.app/', icon: Gamepad2 },
+      { name: 'Fake Result Checker', url: 'https://pu-eosin.vercel.app/', icon: GraduationCap },
     ],
   },
 ];

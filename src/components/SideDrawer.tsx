@@ -20,7 +20,7 @@ const sections = [
       { name: 'Age Calculator', url: 'https://age-calculator-alpha-roan.vercel.app/', icon: Calculator },
       { name: 'Live Visitor Counter', url: 'https://couner.vercel.app/', icon: Eye },
       { name: 'Year Progress Tracker', url: 'https://year-unveiled.vercel.app/', icon: Clock },
-      { name: 'PDF Tool', url: 'https://pdf-page-master.vercel.app/', icon: FileDown },
+      { name: 'PDF Tool', url: 'https://pdfcraft.devtoolcafe.com/en/', icon: FileDown },
     ],
   },
   {

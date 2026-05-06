@@ -18,14 +18,14 @@ export async function fetchWatermarkImage(): Promise<ArrayBuffer> {
  * Applies a centered watermark to all pages of a PDF
  * @param pdfBytes - Original PDF file as ArrayBuffer
  * @param watermarkBytes - Watermark image as ArrayBuffer
- * @param opacity - Opacity of watermark (0-1, default 0.1 = 10%)
+ * @param opacity - Opacity of watermark (0-1, default 0.2 = 20%)
  * @param watermarkMaxSize - Maximum size of watermark in pixels (default 200)
  * @returns Modified PDF as Uint8Array
  */
 export async function applyWatermark(
   pdfBytes: ArrayBuffer,
   watermarkBytes: ArrayBuffer,
-  opacity: number = 0.1,
+  opacity: number = 0.2,
   watermarkMaxSize: number = 200
 ): Promise<Uint8Array> {
   // Load the PDF document
@@ -94,7 +94,7 @@ export async function processFile(
   watermarkBytes: ArrayBuffer,
   onProgress?: (progress: number) => void,
   watermarkSize: number = 200,
-  watermarkOpacity: number = 0.1
+  watermarkOpacity: number = 0.2
 ): Promise<{ filename: string; data: Uint8Array }> {
   onProgress?.(10);
   

@@ -22,7 +22,7 @@ const Index = () => {
   const [processedFiles, setProcessedFiles] = useState<{ filename: string; data: Uint8Array }[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [watermarkSize, setWatermarkSize] = useState(400);
-  const [watermarkOpacity, setWatermarkOpacity] = useState(10);
+  const [watermarkOpacity, setWatermarkOpacity] = useState(8);
   const [totalWatermarked, setTotalWatermarked] = useState<number | null>(null);
   // Load global count from database and subscribe to realtime updates
   useEffect(() => {
@@ -323,14 +323,14 @@ const Index = () => {
               value={[watermarkOpacity]}
               onValueChange={(values) => setWatermarkOpacity(values[0])}
               min={5}
-              max={100}
-              step={5}
+              max={20}
+              step={1}
               disabled={isProcessing}
               className="w-full"
             />
             <div className="flex justify-between text-xs text-muted-foreground">
               <span>Subtle (5%)</span>
-              <span>Solid (100%)</span>
+              <span>Visible (20%)</span>
             </div>
           </div>
         </div>

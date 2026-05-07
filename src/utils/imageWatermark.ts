@@ -2,14 +2,14 @@
  * Applies a centered watermark to an image
  * @param imageFile - Original image File object
  * @param watermarkBytes - Watermark image as ArrayBuffer
- * @param opacity - Opacity of watermark (0-1, default 0.2 = 20%)
+ * @param opacity - Opacity of watermark (0-1, default 0.1 = 10%)
  * @param watermarkMaxSize - Maximum size of watermark in pixels (default 200)
  * @returns Modified image as Uint8Array
  */
 export async function applyImageWatermark(
   imageFile: File,
   watermarkBytes: ArrayBuffer,
-  opacity: number = 0.2,
+  opacity: number = 0.1,
   watermarkMaxSize: number = 200
 ): Promise<Uint8Array> {
   return new Promise((resolve, reject) => {
@@ -112,7 +112,7 @@ export async function processImageFile(
   watermarkBytes: ArrayBuffer,
   onProgress?: (progress: number) => void,
   watermarkSize: number = 200,
-  watermarkOpacity: number = 0.2
+  watermarkOpacity: number = 0.1
 ): Promise<{ filename: string; data: Uint8Array }> {
   onProgress?.(10);
 

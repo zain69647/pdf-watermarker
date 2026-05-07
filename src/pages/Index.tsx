@@ -22,7 +22,7 @@ const Index = () => {
   const [processedFiles, setProcessedFiles] = useState<{ filename: string; data: Uint8Array }[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [watermarkSize, setWatermarkSize] = useState(400);
-  const [watermarkOpacity, setWatermarkOpacity] = useState(20);
+  const [watermarkOpacity, setWatermarkOpacity] = useState(10);
   const [totalWatermarked, setTotalWatermarked] = useState<number | null>(null);
   // Load global count from database and subscribe to realtime updates
   useEffect(() => {

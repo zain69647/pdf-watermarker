@@ -3,8 +3,7 @@ import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2, FileCheck } fro
 import puacpLogo from '@/assets/puacp-logo.png';
 import DropZone from '@/components/DropZone';
 import FileList, { FileItem } from '@/components/FileList';
-import { fetchWatermarkImage, processFile } from '@/utils/pdfWatermark';
-import { processImageFile, isImageFile, isPdfFile } from '@/utils/imageWatermark';
+import { isImageFile, isPdfFile } from '@/utils/imageWatermark';
 import { downloadFiles, downloadSingleFile } from '@/utils/downloadHelper';
 import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
@@ -107,6 +106,15 @@ const Index = () => {
     setProcessedFiles([]);
     
     try {
+      // Lazy-load heavy watermarking modules (pdf-lib, canvas helpers)
+      // only when the user actually triggers processing. This keeps the
+      // initial JS bundle small and improves FCP/LCP.
+      const [{ fetchWatermarkImage, processFile }, { processImageFile }] =
+        await Promise.all([
+          import('@/utils/pdfWatermark'),
+          import('@/utils/imageWatermark'),
+        ]);
+
       // Fetch watermark image
       const watermarkBytes = await fetchWatermarkImage();
       

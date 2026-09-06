@@ -7,7 +7,7 @@ const sections = [
     label: 'Student Tools',
     icon: GraduationCap,
     items: [
-      { name: 'CGPA Predictor', url: 'https://cgpa-predictor-mu.vercel.app/', icon: BarChart3 },
+      { name: 'CGPA Calculator', url: 'https://cgpapredictor.vercel.app/', icon: BarChart3 },
       { name: 'Regression Analysis', url: 'https://reg-ananlysis.vercel.app/', icon: BarChart3 },
       { name: 'Paper Finder', url: 'https://paper-finder.great-site.net/', icon: Search },
     ],

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Menu, X, GraduationCap, BarChart3, FileText, HardDrive, Calculator, Eye, Clock, FileDown, Gamepad2, Search, User, Wrench, Sparkles, Zap } from 'lucide-react';
+import { Menu, X, GraduationCap, BarChart3, FileText, HardDrive, Calculator, Eye, Clock, FileDown, Gamepad2, Search, User, Wrench, Sparkles, Zap, CopyX } from 'lucide-react';
 
 const sections = [
   {

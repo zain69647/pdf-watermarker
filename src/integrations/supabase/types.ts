@@ -17,16 +17,19 @@ export type Database = {
       global_stats: {
         Row: {
           id: string
+          total_apk_downloads: number
           total_watermarked: number
           updated_at: string
         }
         Insert: {
           id?: string
+          total_apk_downloads?: number
           total_watermarked?: number
           updated_at?: string
         }
         Update: {
           id?: string
+          total_apk_downloads?: number
           total_watermarked?: number
           updated_at?: string
         }
@@ -37,6 +40,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      increment_apk_download_counter: { Args: never; Returns: number }
       increment_watermark_counter: {
         Args: { increment_by: number }
         Returns: number

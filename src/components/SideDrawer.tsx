@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Menu, X, GraduationCap, BarChart3, FileText, HardDrive, Calculator, Eye, Clock, FileDown, Gamepad2, Search, User, Wrench, Sparkles, Zap } from 'lucide-react';
+import { Menu, X, GraduationCap, BarChart3, FileText, HardDrive, Calculator, Eye, Clock, FileDown, Gamepad2, Search, User, Wrench, Sparkles, Zap, CopyX } from 'lucide-react';
 
 const sections = [
   {
@@ -21,6 +21,7 @@ const sections = [
       { name: 'Live Visitor Counter', url: 'https://couner.vercel.app/', icon: Eye },
       { name: 'Year Progress Tracker', url: 'https://year-unveiled.vercel.app/', icon: Clock },
       { name: 'PDF Tool', url: 'https://pdfcraft.devtoolcafe.com/en/', icon: FileDown },
+      { name: 'PDF Deduplicator', url: 'https://script-to-site.vercel.app/', icon: CopyX },
     ],
   },
   {

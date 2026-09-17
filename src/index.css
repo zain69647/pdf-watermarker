@@ -192,4 +192,37 @@
   .animate-fade-in-up {
     animation: fade-in-up 0.3s ease-out forwards;
   }
+
+  @keyframes apk-glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.45);
+    }
+    50% {
+      box-shadow: 0 0 0 7px rgba(37, 99, 235, 0);
+    }
+  }
+
+  .apk-glow {
+    animation: apk-glow 1.8s ease-out infinite;
+  }
+
+  @keyframes apk-icon-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  .apk-icon-bounce {
+    animation: apk-icon-bounce 1.8s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .apk-glow,
+    .apk-icon-bounce {
+      animation: none;
+    }
+  }
 }

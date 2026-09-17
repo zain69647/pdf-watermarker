@@ -24,18 +24,29 @@ const Index = () => {
   const [watermarkSize, setWatermarkSize] = useState(400);
   const [watermarkOpacity, setWatermarkOpacity] = useState(8);
   const [totalWatermarked, setTotalWatermarked] = useState<number | null>(null);
+  const [totalApkDownloads, setTotalApkDownloads] = useState<number | null>(null);
+
+  // Track APK download clicks
+  const handleApkDownload = useCallback(() => {
+    supabase.rpc('increment_apk_download_counter').then(({ data, error }) => {
+      if (!error && typeof data === 'number') {
+        setTotalApkDownloads(data);
+      }
+    });
+  }, []);
   // Load global count from database and subscribe to realtime updates
   useEffect(() => {
     // Fetch initial count
     const fetchCount = async () => {
       const { data, error } = await supabase
         .from('global_stats')
-        .select('total_watermarked')
+        .select('total_watermarked, total_apk_downloads')
         .eq('id', 'main')
         .single();
-      
+
       if (!error && data) {
         setTotalWatermarked(data.total_watermarked);
+        setTotalApkDownloads(data.total_apk_downloads);
       }
     };
     
@@ -54,6 +65,7 @@ const Index = () => {
         },
         (payload) => {
           setTotalWatermarked(payload.new.total_watermarked);
+          setTotalApkDownloads(payload.new.total_apk_downloads);
         }
       )
       .subscribe();
@@ -235,10 +247,15 @@ const Index = () => {
           animationDelay: '0ms',
         }}
       >
-        <div className="container max-w-lg mx-auto flex items-center justify-center gap-2">
+        <div className="container max-w-lg mx-auto flex items-center justify-center gap-2 flex-wrap">
           <FileCheck className="w-4 h-4 text-white" />
           <span className="text-sm font-medium text-white">
             <AnimatedCounter value={totalWatermarked} className="font-bold text-white" /> files watermarked globally
+          </span>
+          <span className="text-white/60 text-sm" aria-hidden="true">•</span>
+          <Smartphone className="w-4 h-4 text-white" />
+          <span className="text-sm font-medium text-white">
+            <AnimatedCounter value={totalApkDownloads} className="font-bold text-white" /> app downloads
           </span>
         </div>
       </div>
@@ -260,6 +277,7 @@ const Index = () => {
           <a
             href={apkAsset.url}
             download="Watermarker_v1.0.1.apk"
+            onClick={handleApkDownload}
             className="ml-auto relative flex items-center gap-1.5 whitespace-nowrap rounded-full pl-2.5 pr-3.5 py-1.5 bg-primary text-white text-xs font-semibold shadow-md transition-transform duration-200 hover:scale-105"
             aria-label="Download Android APK app"
           >

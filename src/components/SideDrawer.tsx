@@ -21,6 +21,7 @@ const sections = [
       { name: 'Live Visitor Counter', url: 'https://couner.vercel.app/', icon: Eye },
       { name: 'Year Progress Tracker', url: 'https://year-unveiled.vercel.app/', icon: Clock },
       { name: 'PDF Tool', url: 'https://pdfcraft.devtoolcafe.com/en/', icon: FileDown },
+      { name: 'PDF Deduplicator', url: 'https://script-to-site.vercel.app/', icon: CopyX },
     ],
   },
   {

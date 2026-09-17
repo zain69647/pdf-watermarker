@@ -260,7 +260,7 @@ const Index = () => {
           <a
             href={apkAsset.url}
             download="Watermarker_v1.0.1.apk"
-            className="ml-auto relative flex items-center gap-1.5 rounded-full pl-2.5 pr-3.5 py-1.5 bg-primary text-white text-xs font-semibold shadow-md transition-transform duration-200 hover:scale-105"
+            className="ml-auto relative flex items-center gap-1.5 whitespace-nowrap rounded-full pl-2.5 pr-3.5 py-1.5 bg-primary text-white text-xs font-semibold shadow-md transition-transform duration-200 hover:scale-105"
             aria-label="Download Android APK app"
           >
             <span className="absolute inset-0 rounded-full apk-glow" aria-hidden="true" />

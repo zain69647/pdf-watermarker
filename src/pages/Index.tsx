@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
-import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2, FileCheck } from 'lucide-react';
+import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2, FileCheck, Smartphone } from 'lucide-react';
 import puacpLogo from '@/assets/puacp-logo.png';
+import apkAsset from '@/assets/watermarker-apk.asset.json';
 import DropZone from '@/components/DropZone';
 import FileList, { FileItem } from '@/components/FileList';
 import { isImageFile, isPdfFile } from '@/utils/imageWatermark';
@@ -256,6 +257,16 @@ const Index = () => {
             <h1 className="text-xl font-bold text-foreground">Watermarker</h1>
             <p className="text-xs text-muted-foreground">Add watermarks to PDFs & images</p>
           </div>
+          <a
+            href={apkAsset.url}
+            download="Watermarker_v1.0.1.apk"
+            className="ml-auto relative flex items-center gap-1.5 whitespace-nowrap rounded-full pl-2.5 pr-3.5 py-1.5 bg-primary text-white text-xs font-semibold shadow-md transition-transform duration-200 hover:scale-105"
+            aria-label="Download Android APK app"
+          >
+            <span className="absolute inset-0 rounded-full apk-glow" aria-hidden="true" />
+            <Smartphone className="relative w-4 h-4 apk-icon-bounce" />
+            <span className="relative">Get App</span>
+          </a>
         </div>
       </header>
 

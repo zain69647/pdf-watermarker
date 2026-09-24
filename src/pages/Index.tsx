@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Droplet, Download, Trash2, AlertTriangle, CheckCircle2, FileCheck, Smartphone } from 'lucide-react';
 import puacpLogo from '@/assets/puacp-logo.png';
-const APK_URL = '/downloads/Watermarker_v1.0.1.apk';
+const APK_URL = '/Watermarker_v1.0.1.apk';
 import DropZone from '@/components/DropZone';
 import FileList, { FileItem } from '@/components/FileList';
 import { isImageFile, isPdfFile } from '@/utils/imageWatermark';

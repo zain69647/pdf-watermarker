@@ -125,7 +125,7 @@ const SideDrawer = () => {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="p-2 rounded-xl hover:bg-primary/10 transition-colors duration-200"
+        className="-ml-1.5 p-2 rounded-xl hover:bg-primary/10 transition-colors duration-200"
         aria-label="Open menu"
       >
         <Menu className="w-5 h-5 text-foreground" />

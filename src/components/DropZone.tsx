@@ -77,7 +77,7 @@ const DropZone = ({ onFilesSelected, disabled = false, acceptImages = true }: Dr
 
   return (
     <div
-      className={`drop-zone min-h-[200px] p-8 ${isDragging ? 'dragging' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`drop-zone min-h-[140px] p-5 ${isDragging ? 'dragging' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -96,23 +96,23 @@ const DropZone = ({ onFilesSelected, disabled = false, acceptImages = true }: Dr
         disabled={disabled}
       />
       
-      <div className="flex flex-col items-center gap-4 text-center">
-        <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+      <div className="flex flex-col items-center gap-2.5 text-center">
+        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
           {isDragging ? (
-            <FileText className="w-8 h-8 text-primary animate-pulse" />
+            <FileText className="w-6 h-6 text-primary animate-pulse" />
           ) : (
             <div className="flex items-center gap-1">
-              <Upload className="w-6 h-6 text-primary" />
-              {acceptImages && <Image className="w-5 h-5 text-primary" />}
+              <Upload className="w-5 h-5 text-primary" />
+              {acceptImages && <Image className="w-4 h-4 text-primary" />}
             </div>
           )}
         </div>
         
         <div>
-          <p className="text-lg font-semibold text-foreground">
+          <p className="text-base font-semibold text-foreground">
             {isDragging ? 'Drop files here' : 'Upload files'}
           </p>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-xs text-muted-foreground mt-0.5">
             Drag & drop or tap to select
           </p>
         </div>

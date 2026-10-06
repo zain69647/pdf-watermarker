@@ -250,7 +250,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     .apk-glow,
-    .apk-icon-bounce {
+    .apk-icon-bounce,
+    .feedback-ring,
+    .feedback-icon-bounce {
       animation: none;
     }
   }

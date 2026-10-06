@@ -249,17 +249,17 @@ const Index = () => {
 
       {/* Header */}
       <header
-        className="sticky top-0 z-20 border-b border-border px-4 py-4 bg-card/95 backdrop-blur-md animate-fade-in-up"
+        className="sticky top-0 z-20 border-b border-border px-2 sm:px-4 py-2 bg-card/95 backdrop-blur-md animate-fade-in-up"
         style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)', animationDelay: '50ms' }}
       >
-        <div className="container max-w-lg mx-auto flex items-center gap-3">
+        <div className="container max-w-lg mx-auto flex items-center gap-2">
           <SideDrawer />
-          <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/5">
-            <img src={puacpLogo} alt="PUACP Logo" className="w-12 h-12 object-contain" style={{ mixBlendMode: 'multiply' }} />
+          <div className="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl bg-primary/5 shrink-0">
+            <img src={puacpLogo} alt="PUACP Logo" className="w-9 h-9 sm:w-12 sm:h-12 object-contain" style={{ mixBlendMode: 'multiply' }} />
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-foreground">Watermarker</h1>
-            <p className="text-xs text-muted-foreground">Add watermarks to PDFs & images</p>
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-xl font-bold text-foreground leading-tight">Watermarker</h1>
+            <p className="text-[11px] sm:text-xs text-muted-foreground truncate">Add watermarks to PDFs & images</p>
           </div>
           <a
             href={APK_URL}
